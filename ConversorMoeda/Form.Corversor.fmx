@@ -1,0 +1,88 @@
+object frmConversorMoeda: TfrmConversorMoeda
+  Left = 432
+  Top = 120
+  Caption = 'Conversor Moeda'
+  ClientHeight = 153
+  ClientWidth = 585
+  Position = Designed
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  Left = 432
+  Top = 120
+  DesignerMasterStyle = 0
+  object Layout1: TLayout
+    Align = Top
+    Size.Width = 585.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object Label1: TLabel
+      Align = Center
+      Text = 'Conversor Moeda'
+      TabOrder = 0
+    end
+  end
+  object Layout2: TLayout
+    Align = Top
+    Position.Y = 50.000000000000000000
+    Size.Width = 585.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object Label2: TLabel
+      Align = Client
+      Size.Width = 413.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.HorzAlign = Center
+      Text = 'Real(R$)'
+      TabOrder = 0
+    end
+    object EditReal: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Right
+      TabOrder = 1
+      Position.X = 413.000000000000000000
+      Position.Y = 11.000000000000000000
+      Margins.Top = 11.000000000000000000
+      Margins.Right = 20.000000000000000000
+      Margins.Bottom = 11.000000000000000000
+      Size.Width = 152.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      OnKeyDown = EditRealKeyDown
+    end
+  end
+  object Layout3: TLayout
+    Align = Top
+    Position.Y = 100.000000000000000000
+    Size.Width = 585.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object Label3: TLabel
+      Align = Client
+      Size.Width = 413.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.HorzAlign = Center
+      Text = 'Dollar(US$)'
+      TabOrder = 0
+    end
+    object EditDolar: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      Align = Right
+      TabOrder = 1
+      Position.X = 413.000000000000000000
+      Position.Y = 11.000000000000000000
+      Margins.Top = 11.000000000000000000
+      Margins.Right = 20.000000000000000000
+      Margins.Bottom = 11.000000000000000000
+      Size.Width = 152.000000000000000000
+      Size.Height = 28.000000000000000000
+      Size.PlatformDefault = False
+      OnKeyDown = EditDolarKeyDown
+    end
+  end
+end
