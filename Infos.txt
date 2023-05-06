@@ -1,0 +1,20 @@
+-- URLs --
+https://docwiki.embarcadero.com/RADStudio/Sydney/en/Default_Keyboard_Shortcuts
+
+https://jsontodelphi.com/
+
+https://github.com/Spelt/ZXing.Delphi  {Lê QrCode}
+https://github.com/foxitsoftware/DelphiZXingQRCode  {Gera QrCode}
+
+https://api.chucknorris.io/jokes/random
+https://restcountries.com/
+https://breakingbadquotes.xyz/
+
+-- Prompts --
+Give me free sample REST APIs
+
+-- Pesquisas -- 
+delphi docwiki
+
+-- Notas -- 
+Refresh de tela - imitando React
