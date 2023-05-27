@@ -1,0 +1,242 @@
+object frmPrincipal: TfrmPrincipal
+  Left = 0
+  Top = 0
+  Caption = 'Base Threads'
+  ClientHeight = 509
+  ClientWidth = 1005
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poScreenCenter
+  TextHeight = 15
+  object Splitter1: TSplitter
+    Left = 502
+    Top = 0
+    Height = 509
+    Align = alRight
+    ExplicitLeft = 248
+    ExplicitTop = 208
+    ExplicitHeight = 100
+  end
+  object Panel2: TPanel
+    Left = 505
+    Top = 0
+    Width = 500
+    Height = 509
+    Align = alRight
+    TabOrder = 0
+    ExplicitLeft = 336
+    object MemoLog: TMemo
+      AlignWithMargins = True
+      Left = 4
+      Top = 64
+      Width = 492
+      Height = 441
+      Align = alClient
+      Color = clGradientActiveCaption
+      TabOrder = 0
+      ExplicitLeft = 264
+      ExplicitTop = 232
+      ExplicitWidth = 185
+      ExplicitHeight = 89
+    end
+    object PanelControles: TPanel
+      AlignWithMargins = True
+      Left = 4
+      Top = 4
+      Width = 492
+      Height = 54
+      Align = alTop
+      TabOrder = 1
+      ExplicitLeft = 3
+      ExplicitTop = 3
+      ExplicitWidth = 695
+      object ButtonAnnonimous: TButton
+        AlignWithMargins = True
+        Left = 279
+        Top = 4
+        Width = 117
+        Height = 46
+        Align = alLeft
+        Caption = 'Annonimous'
+        TabOrder = 0
+        OnClick = ButtonAnnonimousClick
+      end
+      object CheckBoxSel: TCheckBox
+        Left = 399
+        Top = 1
+        Width = 97
+        Height = 52
+        Align = alLeft
+        Caption = 'Selecionar'
+        TabOrder = 1
+      end
+      object ButtonMath: TButton
+        AlignWithMargins = True
+        Left = 156
+        Top = 4
+        Width = 117
+        Height = 46
+        Align = alLeft
+        Caption = 'Math'
+        TabOrder = 2
+        OnClick = ButtonMathClick
+      end
+      object Panel1: TPanel
+        Left = 1
+        Top = 1
+        Width = 152
+        Height = 52
+        Align = alLeft
+        TabOrder = 3
+        object EditA: TEdit
+          Left = 12
+          Top = 14
+          Width = 53
+          Height = 23
+          NumbersOnly = True
+          TabOrder = 0
+        end
+        object EditB: TEdit
+          Left = 91
+          Top = 14
+          Width = 53
+          Height = 23
+          NumbersOnly = True
+          TabOrder = 1
+        end
+      end
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 0
+    Width = 502
+    Height = 509
+    Align = alClient
+    TabOrder = 1
+    ExplicitLeft = 416
+    ExplicitTop = 256
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object Panel4: TPanel
+      AlignWithMargins = True
+      Left = 4
+      Top = 4
+      Width = 494
+      Height = 57
+      Align = alTop
+      TabOrder = 0
+      ExplicitLeft = 1
+      ExplicitTop = 1
+      ExplicitWidth = 503
+      object ButtonFor: TButton
+        AlignWithMargins = True
+        Left = 4
+        Top = 4
+        Width = 75
+        Height = 49
+        Align = alLeft
+        Caption = 'For'
+        TabOrder = 0
+        OnClick = ButtonForClick
+        ExplicitLeft = 152
+        ExplicitTop = 32
+        ExplicitHeight = 25
+      end
+    end
+    object Panel5: TPanel
+      AlignWithMargins = True
+      Left = 4
+      Top = 67
+      Width = 494
+      Height = 438
+      Align = alClient
+      TabOrder = 1
+      ExplicitLeft = 224
+      ExplicitTop = 120
+      ExplicitWidth = 185
+      ExplicitHeight = 41
+      object Gauge1: TGauge
+        AlignWithMargins = True
+        Left = 4
+        Top = 299
+        Width = 486
+        Height = 53
+        Align = alTop
+        ForeColor = clLime
+        Progress = 0
+        ExplicitTop = 4
+        ExplicitWidth = 489
+      end
+      object Gauge2: TGauge
+        AlignWithMargins = True
+        Left = 4
+        Top = 240
+        Width = 486
+        Height = 53
+        Align = alTop
+        ForeColor = clLime
+        Progress = 0
+        ExplicitLeft = 8
+        ExplicitTop = 12
+        ExplicitWidth = 489
+      end
+      object Gauge3: TGauge
+        AlignWithMargins = True
+        Left = 4
+        Top = 181
+        Width = 486
+        Height = 53
+        Align = alTop
+        ForeColor = clLime
+        Progress = 0
+        ExplicitLeft = 8
+        ExplicitTop = 12
+        ExplicitWidth = 489
+      end
+      object Gauge4: TGauge
+        AlignWithMargins = True
+        Left = 4
+        Top = 122
+        Width = 486
+        Height = 53
+        Align = alTop
+        ForeColor = clLime
+        Progress = 0
+        ExplicitLeft = 8
+        ExplicitTop = 12
+        ExplicitWidth = 489
+      end
+      object Gauge5: TGauge
+        AlignWithMargins = True
+        Left = 4
+        Top = 63
+        Width = 486
+        Height = 53
+        Align = alTop
+        ForeColor = clLime
+        Progress = 0
+        ExplicitLeft = 8
+        ExplicitTop = 12
+        ExplicitWidth = 489
+      end
+      object Gauge6: TGauge
+        AlignWithMargins = True
+        Left = 4
+        Top = 4
+        Width = 486
+        Height = 53
+        Align = alTop
+        ForeColor = clLime
+        Progress = 0
+        ExplicitLeft = 8
+        ExplicitTop = 12
+        ExplicitWidth = 489
+      end
+    end
+  end
+end

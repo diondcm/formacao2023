@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A5E5CD47-8793-4542-8207-C0E0EE8D2BE6}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Params.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="ParamsVCL.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Params">
+        <MSBuild Projects="Params.dproj"/>
+    </Target>
+    <Target Name="Params:Clean">
+        <MSBuild Projects="Params.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Params:Make">
+        <MSBuild Projects="Params.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ParamsVCL">
+        <MSBuild Projects="ParamsVCL.dproj"/>
+    </Target>
+    <Target Name="ParamsVCL:Clean">
+        <MSBuild Projects="ParamsVCL.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ParamsVCL:Make">
+        <MSBuild Projects="ParamsVCL.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Params;ParamsVCL"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Params:Clean;ParamsVCL:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Params:Make;ParamsVCL:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -1,4 +1,6 @@
 -- URLs --
+https://www.youtube.com/watch?v=tAuRQs_d9F8
+
 https://docwiki.embarcadero.com/RADStudio/Sydney/en/Default_Keyboard_Shortcuts
 
 https://docwiki.embarcadero.com/RADStudio/Alexandria/en/Classes_and_Objects_(Delphi)#Private.2C_Protected.2C_and_Public_Members
