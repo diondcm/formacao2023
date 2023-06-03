@@ -1,4 +1,8 @@
 -- URLs --
+https://github.com/AliDehbansiahkarbon/ChatGPTWizard
+
+https://www.nytimes.com/2023/06/02/opinion/ai-coding.html
+
 https://www.youtube.com/watch?v=tAuRQs_d9F8
 
 https://docwiki.embarcadero.com/RADStudio/Sydney/en/Default_Keyboard_Shortcuts
@@ -22,3 +26,20 @@ delphi docwiki
 
 -- Notas -- 
 Refresh de tela - imitando React
+
+--- QrCode DataEncoding ---
+To create a dynamic QR code that executes a specific action, such as opening a URL or logging in to a WiFi network, you need to include the appropriate data in the QR code. Here are some examples of the data you would need to include for different types of dynamic QR codes:
+
+1. URL: To create a dynamic QR code that opens a specific URL, you need to include the URL in the QR code. For example, to create a QR code that opens the URL "https://www.example.com", you would need to include the text "https://www.example.com" in the QR code.
+
+2. WiFi login: To create a dynamic QR code that allows users to log in to a WiFi network, you need to include the network name (SSID) and password (PSK) in the QR code. For example, to create a QR code that allows users to log in to a WiFi network named "MyWiFi" with the password "12345678", you would need to include the text "WIFI:T:WPA;S:MyWiFi;P:12345678;;" in the QR code.
+
+3. Email: To create a dynamic QR code that opens a new email message, you need to include the recipient email address, subject, and body in the QR code. For example, to create a QR code that opens a new email message to the address "example@example.com" with the subject "Hello" and the body "This is a test message", you would need to include the text "mailto:example@example.com?subject=Hello&body=This%20is%20a%20test%20message" in the QR code.
+
+4. Phone number: To create a dynamic QR code that makes a phone call to a specific number, you need to include the phone number in the QR code. For example, to create a QR code that makes a call to the number "+1-123-456-7890", you would need to include the text "tel:+11234567890" in the QR code.
+
+The specific text required for different types of dynamic QR codes may vary depending on the QR code generator you are using, so it's important to refer to the documentation or instructions provided by the generator to ensure that you include the correct data.
+
+
+https://www.qr-code-generator.com/
+https://www.qrcode-monkey.com/

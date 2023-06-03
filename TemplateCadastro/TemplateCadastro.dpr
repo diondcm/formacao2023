@@ -10,7 +10,11 @@ uses
   Data.Cliente in 'Data.Cliente.pas' {dmdCliente: TDataModule},
   Form.Cadastro.Cliente in 'Form.Cadastro.Cliente.pas' {frmCadCliente},
   Data.Produto in 'Data.Produto.pas' {dmdProduto: TDataModule},
-  Form.Cadastro.Produto in 'Form.Cadastro.Produto.pas' {frmCadProduto};
+  Form.Cadastro.Produto in 'Form.Cadastro.Produto.pas' {frmCadProduto},
+  Classe.Mensagens in 'Classe.Mensagens.pas',
+  Classe.Textos in 'Classe.Textos.pas',
+  Base.Form in 'Base.Form.pas' {frmBase},
+  Form.Login in 'Form.Login.pas' {frmLogin};
 
 {$R *.res}
 
@@ -18,13 +22,15 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TdmdImages, dmdImages);
+//  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TdmdConexao, dmdConexao);
-  Application.CreateForm(TdmdBaseCadastro, dmdBaseCadastro);
-  Application.CreateForm(TfrmBaseCadastro, frmBaseCadastro);
-  Application.CreateForm(TdmdCliente, dmdCliente);
-  Application.CreateForm(TfrmCadCliente, frmCadCliente);
-  Application.CreateForm(TdmdProduto, dmdProduto);
-  Application.CreateForm(TfrmCadProduto, frmCadProduto);
+  Application.CreateForm(TfrmBase, frmBase);
   Application.Run;
+
+//  if not frmPrincipal.Login then
+//  begin
+//    Application.Terminate;
+//  end else begin
+//  end;
 end.

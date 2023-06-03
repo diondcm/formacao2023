@@ -10,6 +10,12 @@ uses
 
 type
   TdmdProduto = class(TdmdBaseCadastro)
+    qryDadosID: TFDAutoIncField;
+    qryDadosNOME: TWideStringField;
+    qryDadosDESCRICAO: TWideStringField;
+    qryDadosPRECO: TFloatField;
+    qryDadosESTOQUE: TIntegerField;
+    qryDadosCATEGORIA: TWideStringField;
   private
     { Private declarations }
   public

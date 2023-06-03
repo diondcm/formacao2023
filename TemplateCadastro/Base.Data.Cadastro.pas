@@ -18,8 +18,8 @@ type
     { Public declarations }
   end;
 
-var
-  dmdBaseCadastro: TdmdBaseCadastro;
+//var
+//  dmdBaseCadastro: TdmdBaseCadastro;
 
 implementation
 

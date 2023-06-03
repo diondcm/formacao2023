@@ -1,17 +1,10 @@
-object frmPrincipal: TfrmPrincipal
-  Left = 0
-  Top = 0
+inherited frmPrincipal: TfrmPrincipal
   Caption = 'Template Cadastro'
-  ClientHeight = 442
-  ClientWidth = 628
-  Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
-  Font.Height = -12
-  Font.Name = 'Segoe UI'
-  Font.Style = []
   Menu = MainMenuPrincipal
   Position = poScreenCenter
+  OnCreate = FormCreate
+  OnShow = FormShow
+  ExplicitHeight = 505
   TextHeight = 15
   object ToolBar1: TToolBar
     Left = 0
@@ -26,6 +19,7 @@ object frmPrincipal: TfrmPrincipal
     ParentColor = False
     ShowCaptions = True
     TabOrder = 0
+    ExplicitWidth = 622
     object ToolButtonCliente: TToolButton
       Left = 0
       Top = 0
@@ -68,5 +62,11 @@ object frmPrincipal: TfrmPrincipal
     object ActionPedido: TAction
       Caption = 'Pedido'
     end
+  end
+  object TimerLogin: TTimer
+    Enabled = False
+    OnTimer = TimerLoginTimer
+    Left = 304
+    Top = 240
   end
 end

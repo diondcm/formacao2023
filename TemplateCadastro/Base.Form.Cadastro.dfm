@@ -1,29 +1,32 @@
-object frmBaseCadastro: TfrmBaseCadastro
-  Left = 0
-  Top = 0
+inherited frmBaseCadastro: TfrmBaseCadastro
   Caption = 'Base Cadastro'
-  ClientHeight = 462
-  ClientWidth = 973
-  Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
-  Font.Height = -12
-  Font.Name = 'Segoe UI'
-  Font.Style = []
+  ClientHeight = 502
+  ClientWidth = 1233
+  PopupMenu = PopupMenuNavegacao
   Position = poScreenCenter
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnShow = FormShow
+  ExplicitLeft = 2
+  ExplicitTop = 2
+  ExplicitWidth = 1245
+  ExplicitHeight = 540
   TextHeight = 15
+  inherited StatusBar1: TStatusBar
+    Top = 483
+    Width = 1233
+  end
   object PanelControles: TPanel
     AlignWithMargins = True
     Left = 3
     Top = 3
-    Width = 967
+    Width = 1227
     Height = 45
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 776
+    ExplicitWidth = 1221
     object ShapeSeparador: TShape
-      Left = 263
+      Left = 656
       Top = 1
       Width = 6
       Height = 43
@@ -32,9 +35,9 @@ object frmBaseCadastro: TfrmBaseCadastro
       ExplicitLeft = 445
       ExplicitTop = -1
     end
-    object BitBtn1: TBitBtn
+    object ButtonUltimo: TBitBtn
       AlignWithMargins = True
-      Left = 665
+      Left = 1058
       Top = 4
       Width = 125
       Height = 37
@@ -42,10 +45,8 @@ object frmBaseCadastro: TfrmBaseCadastro
       Align = alLeft
       Caption = '&'#218'ltimo'
       TabOrder = 0
-      ExplicitLeft = 748
-      ExplicitTop = 0
     end
-    object BitBtn2: TBitBtn
+    object ButtonInserir: TBitBtn
       AlignWithMargins = True
       Left = 4
       Top = 4
@@ -55,11 +56,10 @@ object frmBaseCadastro: TfrmBaseCadastro
       Align = alLeft
       Caption = '&Inserir'
       TabOrder = 1
-      ExplicitLeft = 308
     end
-    object BitBtn3: TBitBtn
+    object ButtonSalvar: TBitBtn
       AlignWithMargins = True
-      Left = 135
+      Left = 397
       Top = 4
       Width = 125
       Height = 37
@@ -67,23 +67,21 @@ object frmBaseCadastro: TfrmBaseCadastro
       Align = alLeft
       Caption = '&Salvar'
       TabOrder = 2
-      ExplicitLeft = 414
     end
-    object BitBtn4: TBitBtn
+    object ButtonPrimeiro: TBitBtn
       AlignWithMargins = True
-      Left = 272
+      Left = 665
       Top = 4
       Width = 125
       Height = 37
       Action = DatasetFirst1
       Align = alLeft
-      Caption = '&Primeiro'
+      Caption = 'Pri&meiro'
       TabOrder = 3
-      ExplicitLeft = 520
     end
-    object BitBtn5: TBitBtn
+    object ButtonAnterior: TBitBtn
       AlignWithMargins = True
-      Left = 403
+      Left = 796
       Top = 4
       Width = 125
       Height = 37
@@ -91,11 +89,10 @@ object frmBaseCadastro: TfrmBaseCadastro
       Align = alLeft
       Caption = '&Anterior'
       TabOrder = 4
-      ExplicitLeft = 651
     end
-    object BitBtn6: TBitBtn
+    object ButtonProximo: TBitBtn
       AlignWithMargins = True
-      Left = 534
+      Left = 927
       Top = 4
       Width = 125
       Height = 37
@@ -103,41 +100,79 @@ object frmBaseCadastro: TfrmBaseCadastro
       Align = alLeft
       Caption = '&Pr'#243'ximo'
       TabOrder = 5
-      ExplicitLeft = 757
+    end
+    object ButtonCancelar: TBitBtn
+      AlignWithMargins = True
+      Left = 266
+      Top = 4
+      Width = 125
+      Height = 37
+      Action = DatasetCancel1
+      Align = alLeft
+      Caption = '&Cancelar'
+      TabOrder = 6
+    end
+    object ButtonEditar: TBitBtn
+      AlignWithMargins = True
+      Left = 135
+      Top = 4
+      Width = 125
+      Height = 37
+      Action = DatasetEdit1
+      Align = alLeft
+      Caption = '&Editar'
+      TabOrder = 7
+    end
+    object ButtonDeltar: TBitBtn
+      AlignWithMargins = True
+      Left = 528
+      Top = 4
+      Width = 125
+      Height = 37
+      Action = DatasetDelete1
+      Align = alLeft
+      Caption = '&Deletar'
+      TabOrder = 8
     end
   end
   object PageControlCadastro: TPageControl
     Left = 0
     Top = 51
-    Width = 973
-    Height = 411
+    Width = 1233
+    Height = 432
     ActivePage = TabPesquisa
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 806
+    ExplicitWidth = 1227
+    ExplicitHeight = 423
     object TabPesquisa: TTabSheet
       Caption = 'Pesquisa'
       object DBGridCadastro: TDBGrid
         Left = 0
         Top = 0
-        Width = 965
-        Height = 381
+        Width = 1225
+        Height = 402
         Align = alClient
         DataSource = dtsDados
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        PopupMenu = PopupMenuNavegacao
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -12
         TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
+        OnDblClick = DBGridCadastroDblClick
       end
     end
     object TabCadastro: TTabSheet
       Caption = 'Cadastro'
       ImageIndex = 1
+      PopupMenu = PopupMenuNavegacao
     end
   end
   object dtsDados: TDataSource
+    OnStateChange = dtsDadosStateChange
     Left = 392
     Top = 240
   end
@@ -147,9 +182,10 @@ object frmBaseCadastro: TfrmBaseCadastro
     Top = 240
     object DatasetFirst1: TDataSetFirst
       Category = 'Dataset'
-      Caption = '&First'
+      Caption = 'Pri&meiro'
       Hint = 'First'
       ImageIndex = 2
+      ShortCut = 16466
       DataSource = dtsDados
     end
     object DatasetPrior1: TDataSetPrior
@@ -171,6 +207,7 @@ object frmBaseCadastro: TfrmBaseCadastro
       Caption = '&'#218'ltimo'
       Hint = 'Last'
       ImageIndex = 5
+      ShortCut = 16468
       DataSource = dtsDados
     end
     object DatasetInsert1: TDataSetInsert
@@ -185,6 +222,7 @@ object frmBaseCadastro: TfrmBaseCadastro
       Caption = '&Deletar'
       Hint = 'Delete'
       ImageIndex = 7
+      OnExecute = DatasetDelete1Execute
       DataSource = dtsDados
     end
     object DatasetEdit1: TDataSetEdit
@@ -214,6 +252,37 @@ object frmBaseCadastro: TfrmBaseCadastro
       Hint = 'Refresh'
       ImageIndex = 11
       DataSource = dtsDados
+    end
+  end
+  object TimerOpen: TTimer
+    Enabled = False
+    OnTimer = TimerOpenTimer
+    Left = 684
+    Top = 237
+  end
+  object PopupMenuNavegacao: TPopupMenu
+    Left = 544
+    Top = 160
+    object Inserir1: TMenuItem
+      Action = DatasetInsert1
+    end
+    object Editar1: TMenuItem
+      Action = DatasetEdit1
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Primeiro1: TMenuItem
+      Action = DatasetFirst1
+    end
+    object ltimo1: TMenuItem
+      Action = DatasetLast1
+    end
+    object N2: TMenuItem
+      Caption = '-'
+    end
+    object Deletar1: TMenuItem
+      Action = DatasetDelete1
     end
   end
 end

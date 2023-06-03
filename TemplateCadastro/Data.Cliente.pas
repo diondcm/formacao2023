@@ -10,14 +10,19 @@ uses
 
 type
   TdmdCliente = class(TdmdBaseCadastro)
+    qryDadosID: TFDAutoIncField;
+    qryDadosCODIGO: TIntegerField;
+    qryDadosNOME: TWideStringField;
+    qryDadosDATA_CADASTRO: TDateTimeField;
+    qryDadosSALDO: TFloatField;
   private
     { Private declarations }
   public
     { Public declarations }
   end;
 
-var
-  dmdCliente: TdmdCliente;
+//var
+//  dmdCliente: TdmdCliente;
 
 implementation
 

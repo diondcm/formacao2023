@@ -102,6 +102,14 @@
             <Form>frmPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Form.ThreadExcept.pas">
+            <Form>frmThreadsExcept</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Form.CriticalSection.pas">
+            <Form>frmCriticalSection</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <None Include="BaseThreads.todo"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

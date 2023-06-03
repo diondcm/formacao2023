@@ -9,6 +9,9 @@
         <Projects Include="ParamsVCL.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="ParamsTests.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="ParamsVCL:Make">
         <MSBuild Projects="ParamsVCL.dproj" Targets="Make"/>
     </Target>
+    <Target Name="ParamsTests">
+        <MSBuild Projects="ParamsTests.dproj"/>
+    </Target>
+    <Target Name="ParamsTests:Clean">
+        <MSBuild Projects="ParamsTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ParamsTests:Make">
+        <MSBuild Projects="ParamsTests.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Params;ParamsVCL"/>
+        <CallTarget Targets="Params;ParamsVCL;ParamsTests"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Params:Clean;ParamsVCL:Clean"/>
+        <CallTarget Targets="Params:Clean;ParamsVCL:Clean;ParamsTests:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Params:Make;ParamsVCL:Make"/>
+        <CallTarget Targets="Params:Make;ParamsVCL:Make;ParamsTests:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
