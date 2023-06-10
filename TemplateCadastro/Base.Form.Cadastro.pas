@@ -7,7 +7,10 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls, Data.Imagens,
   System.Actions, Vcl.ActnList, Vcl.DBActns, Base.Data.Cadastro,
-  Classe.Mensagens, Classe.Textos, Base.Form, Vcl.Menus;
+  Classe.Mensagens, Classe.Textos, Base.Form, Vcl.Menus, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TfrmBaseCadastro = class(TfrmBase)
@@ -47,6 +50,9 @@ type
     ltimo1: TMenuItem;
     N2: TMenuItem;
     Deletar1: TMenuItem;
+    ActionPesquisar: TAction;
+    N3: TMenuItem;
+    Pesquisar1: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure DatasetDelete1Execute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -54,6 +60,8 @@ type
     procedure TimerOpenTimer(Sender: TObject);
     procedure dtsDadosStateChange(Sender: TObject);
     procedure DBGridCadastroDblClick(Sender: TObject);
+    procedure DBGridCadastroTitleClick(Column: TColumn);
+    procedure ActionPesquisarExecute(Sender: TObject);
   private
     FDmdBase: TdmdBaseCadastro;
     function GetDmdBase: TdmdBaseCadastro;
@@ -68,6 +76,18 @@ type
 implementation
 
 {$R *.dfm}
+
+uses Classe.Grid.Helper, Form.Pesquisa;
+
+procedure TfrmBaseCadastro.ActionPesquisarExecute(Sender: TObject);
+begin
+  TfrmPesquisa.PesquisarRegistroPorID(DmdBase.qryDados,
+    procedure(ID: Integer)
+    begin
+      var qry: TFDQuery := TFDQuery(dtsDados.DataSet);
+      qry.Locate('ID', ID);
+    end);
+end;
 
 procedure TfrmBaseCadastro.AtualizaNumeroRegistros;
 begin
@@ -93,6 +113,12 @@ begin
   begin
     DatasetEdit1.Execute;
   end;
+end;
+
+procedure TfrmBaseCadastro.DBGridCadastroTitleClick(Column: TColumn);
+begin
+  inherited;
+  DBGridCadastro.IndexaPorField(Column);
 end;
 
 procedure TfrmBaseCadastro.dtsDadosStateChange(Sender: TObject);
@@ -147,6 +173,7 @@ procedure TfrmBaseCadastro.TimerOpenTimer(Sender: TObject);
 begin
   TimerOpen.Enabled := False;
 
+  DmdBase.qryDados.Close;
   DmdBase.qryDados.Open;
   AtualizaNumeroRegistros;
 end;

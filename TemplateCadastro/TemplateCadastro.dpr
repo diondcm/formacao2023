@@ -14,7 +14,12 @@ uses
   Classe.Mensagens in 'Classe.Mensagens.pas',
   Classe.Textos in 'Classe.Textos.pas',
   Base.Form in 'Base.Form.pas' {frmBase},
-  Form.Login in 'Form.Login.pas' {frmLogin};
+  Form.Login in 'Form.Login.pas' {frmLogin},
+  Classe.Cliente in 'Classe.Cliente.pas',
+  Classe.Grid.Helper in 'Classe.Grid.Helper.pas',
+  Form.Pesquisa in 'Form.Pesquisa.pas' {frmPesquisa},
+  Data.Pedido in 'Data.Pedido.pas' {dmdPedido: TDataModule},
+  Form.Cadastro.Pedido in 'Form.Cadastro.Pedido.pas' {frmCadPedido};
 
 {$R *.res}
 
@@ -22,7 +27,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TdmdImages, dmdImages);
-//  Application.CreateForm(TfrmLogin, frmLogin);
+  //  Application.CreateForm(TfrmLogin, frmLogin);
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TdmdConexao, dmdConexao);
   Application.CreateForm(TfrmBase, frmBase);

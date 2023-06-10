@@ -1,4 +1,8 @@
 -- URLs --
+https://getitnow.embarcadero.com/python4delphi/
+
+https://docwiki.embarcadero.com/RADStudio/Sydney/en/Installing_a_Debugger_on_a_Remote_Machine
+
 https://github.com/AliDehbansiahkarbon/ChatGPTWizard
 
 https://www.nytimes.com/2023/06/02/opinion/ai-coding.html

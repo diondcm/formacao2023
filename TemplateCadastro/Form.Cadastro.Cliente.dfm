@@ -1,47 +1,33 @@
 inherited frmCadCliente: TfrmCadCliente
   Caption = 'Cadastro de Cliente'
+  ClientHeight = 493
   ClientWidth = 1201
   OnCreate = FormCreate
   ExplicitWidth = 1213
   TextHeight = 15
+  inherited StatusBar1: TStatusBar
+    Top = 474
+    Width = 1201
+    ExplicitWidth = 1195
+  end
   inherited PanelControles: TPanel
     Width = 1195
-    ExplicitWidth = 846
+    ExplicitWidth = 1189
     inherited ShapeSeparador: TShape
       ExplicitLeft = 210
       ExplicitTop = -15
     end
-    inherited ButtonUltimo: TBitBtn
-      ExplicitLeft = 1058
-    end
-    inherited ButtonSalvar: TBitBtn
-      ExplicitLeft = 397
-    end
-    inherited ButtonPrimeiro: TBitBtn
-      ExplicitLeft = 665
-    end
-    inherited ButtonAnterior: TBitBtn
-      ExplicitLeft = 796
-    end
-    inherited ButtonProximo: TBitBtn
-      ExplicitLeft = 927
-    end
-    inherited ButtonCancelar: TBitBtn
-      ExplicitLeft = 266
-    end
-    inherited ButtonDeltar: TBitBtn
-      ExplicitLeft = 528
-      ExplicitTop = 4
-    end
   end
   inherited PageControlCadastro: TPageControl
     Width = 1201
-    ExplicitWidth = 852
-    ExplicitHeight = 442
+    Height = 423
+    ExplicitWidth = 1195
     inherited TabPesquisa: TTabSheet
       ExplicitWidth = 1193
+      ExplicitHeight = 393
       inherited DBGridCadastro: TDBGrid
         Width = 1193
+        Height = 393
         Columns = <
           item
             Expanded = False
@@ -71,6 +57,7 @@ inherited frmCadCliente: TfrmCadCliente
     end
     inherited TabCadastro: TTabSheet
       ExplicitWidth = 1193
+      ExplicitHeight = 393
       object Label2: TLabel
         Left = 48
         Top = 32

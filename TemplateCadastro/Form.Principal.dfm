@@ -4,8 +4,14 @@ inherited frmPrincipal: TfrmPrincipal
   Position = poScreenCenter
   OnCreate = FormCreate
   OnShow = FormShow
+  ExplicitWidth = 640
   ExplicitHeight = 505
   TextHeight = 15
+  inherited StatusBar1: TStatusBar
+    ExplicitLeft = 0
+    ExplicitTop = 414
+    ExplicitWidth = 622
+  end
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
@@ -30,6 +36,11 @@ inherited frmPrincipal: TfrmPrincipal
       Top = 0
       Action = ActionProduto
     end
+    object ToolButtonPedido: TToolButton
+      Left = 126
+      Top = 0
+      Action = ActionPedido
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = dmdImages.ImageListPrincipal
@@ -42,6 +53,9 @@ inherited frmPrincipal: TfrmPrincipal
       end
       object Produto1: TMenuItem
         Action = ActionProduto
+      end
+      object Pedido1: TMenuItem
+        Action = ActionPedido
       end
     end
   end
@@ -61,6 +75,7 @@ inherited frmPrincipal: TfrmPrincipal
     end
     object ActionPedido: TAction
       Caption = 'Pedido'
+      OnExecute = ActionPedidoExecute
     end
   end
   object TimerLogin: TTimer

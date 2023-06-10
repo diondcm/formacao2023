@@ -23,11 +23,14 @@ type
     ToolButtonProduto: TToolButton;
     Produto1: TMenuItem;
     TimerLogin: TTimer;
+    Pedido1: TMenuItem;
+    ToolButtonPedido: TToolButton;
     procedure ActionClienteExecute(Sender: TObject);
     procedure ActionProdutoExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure TimerLoginTimer(Sender: TObject);
+    procedure ActionPedidoExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,11 +45,16 @@ implementation
 
 {$R *.dfm}
 
-uses Form.Login;
+uses Form.Login, Form.Cadastro.Pedido;
 
 procedure TfrmPrincipal.ActionClienteExecute(Sender: TObject);
 begin
   TfrmCadCliente.Create(Application).Show;
+end;
+
+procedure TfrmPrincipal.ActionPedidoExecute(Sender: TObject);
+begin
+  TfrmCadPedido.Create(Application).Show;
 end;
 
 procedure TfrmPrincipal.ActionProdutoExecute(Sender: TObject);

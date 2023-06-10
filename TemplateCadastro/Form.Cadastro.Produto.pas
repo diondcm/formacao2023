@@ -35,10 +35,12 @@ implementation
 
 {$R *.dfm}
 
+uses Data.Conexao;
+
 procedure TfrmCadProduto.FormCreate(Sender: TObject);
 begin
   inherited;
-  DmdBase := TdmdProduto.Create(Self);
+  DmdBase := TdmdProduto.Create(Self, dmdConexao.FDConnection);
 end;
 
 end.

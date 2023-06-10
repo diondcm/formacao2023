@@ -1,14 +1,15 @@
 inherited frmCadProduto: TfrmCadProduto
   Caption = 'Cadastro de Produto'
+  ClientHeight = 511
   ClientWidth = 1200
   OnCreate = FormCreate
   ExplicitWidth = 1212
   TextHeight = 15
   inherited StatusBar1: TStatusBar
+    Top = 492
     Width = 1200
     ExplicitLeft = 0
-    ExplicitTop = 474
-    ExplicitWidth = 1194
+    ExplicitWidth = 1200
   end
   inherited PanelControles: TPanel
     Width = 1194
@@ -20,8 +21,8 @@ inherited frmCadProduto: TfrmCadProduto
   end
   inherited PageControlCadastro: TPageControl
     Width = 1200
-    ActivePage = TabPesquisa
-    ExplicitWidth = 1194
+    Height = 441
+    ExplicitWidth = 1200
     inherited TabPesquisa: TTabSheet
       ExplicitWidth = 1192
       inherited DBGridCadastro: TDBGrid

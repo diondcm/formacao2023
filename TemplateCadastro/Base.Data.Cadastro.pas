@@ -15,7 +15,8 @@ type
   private
     { Private declarations }
   public
-    { Public declarations }
+    constructor Create(AOwner: TComponent; Conn: TFDConnection); reintroduce; overload;
+    procedure PreencheConection(conn: TFDConnection);
   end;
 
 //var
@@ -26,5 +27,24 @@ implementation
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+{ TdmdBaseCadastro }
+
+constructor TdmdBaseCadastro.Create(AOwner: TComponent; Conn: TFDConnection);
+begin
+  inherited Create(AOwner);
+  PreencheConection(Conn);
+end;
+
+procedure TdmdBaseCadastro.PreencheConection(conn: TFDConnection);
+begin
+  for var i: Integer := 0 to Self.ComponentCount -1 do
+  begin
+    if Self.Components[i] is TFDQuery then
+    begin
+      TFDQuery(Self.Components[i]).Connection := conn;
+    end;
+  end;
+end;
 
 end.

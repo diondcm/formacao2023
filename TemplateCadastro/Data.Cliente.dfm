@@ -1,18 +1,24 @@
 inherited dmdCliente: TdmdCliente
   PixelsPerInch = 120
   inherited qryDados: TFDQuery
+    AfterInsert = qryDadosAfterInsert
+    BeforePost = qryDadosBeforePost
+    BeforeDelete = qryDadosBeforeDelete
+    OnNewRecord = qryDadosNewRecord
     SQL.Strings = (
       'SELECT ID,'
       '       CODIGO,'
       '       NOME,'
       '       DATA_CADASTRO,'
       '       SALDO'
-      '  FROM CLIENTE')
+      '  FROM CLIENTE'
+      '  WHERE EXCLUIDO = False')
     Left = 440
     object qryDadosID: TFDAutoIncField
       FieldName = 'ID'
       Origin = 'ID'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
       Visible = False
     end
     object qryDadosCODIGO: TIntegerField
@@ -41,5 +47,17 @@ inherited dmdCliente: TdmdCliente
       Origin = 'SALDO'
       DisplayFormat = 'R$ 0.,00'
     end
+  end
+  object qryExcluiCliente: TFDQuery
+    SQL.Strings = (
+      'UPDATE CLIENTE SET EXCLUIDO = True '
+      'WHERE ID = :ID')
+    Left = 616
+    Top = 312
+    ParamData = <
+      item
+        Name = 'ID'
+        ParamType = ptInput
+      end>
   end
 end

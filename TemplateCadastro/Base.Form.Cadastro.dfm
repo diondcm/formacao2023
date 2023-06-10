@@ -7,14 +7,17 @@ inherited frmBaseCadastro: TfrmBaseCadastro
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
-  ExplicitLeft = 2
-  ExplicitTop = 2
+  ExplicitLeft = 3
+  ExplicitTop = 3
   ExplicitWidth = 1245
   ExplicitHeight = 540
   TextHeight = 15
   inherited StatusBar1: TStatusBar
     Top = 483
     Width = 1233
+    ExplicitLeft = 0
+    ExplicitTop = 474
+    ExplicitWidth = 1227
   end
   object PanelControles: TPanel
     AlignWithMargins = True
@@ -163,6 +166,7 @@ inherited frmBaseCadastro: TfrmBaseCadastro
         TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
         OnDblClick = DBGridCadastroDblClick
+        OnTitleClick = DBGridCadastroTitleClick
       end
     end
     object TabCadastro: TTabSheet
@@ -253,6 +257,10 @@ inherited frmBaseCadastro: TfrmBaseCadastro
       ImageIndex = 11
       DataSource = dtsDados
     end
+    object ActionPesquisar: TAction
+      Caption = 'Pesquisar'
+      OnExecute = ActionPesquisarExecute
+    end
   end
   object TimerOpen: TTimer
     Enabled = False
@@ -283,6 +291,13 @@ inherited frmBaseCadastro: TfrmBaseCadastro
     end
     object Deletar1: TMenuItem
       Action = DatasetDelete1
+    end
+    object N3: TMenuItem
+      Caption = '-'
+    end
+    object Pesquisar1: TMenuItem
+      Action = ActionPesquisar
+      ShortCut = 16465
     end
   end
 end
