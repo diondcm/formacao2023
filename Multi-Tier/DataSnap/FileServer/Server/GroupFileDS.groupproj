@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{30E2C30F-7500-45FF-8D56-3F5B5BC8799C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="FileServerDS.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Client\FlieClient.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="FileServerDS">
+        <MSBuild Projects="FileServerDS.dproj"/>
+    </Target>
+    <Target Name="FileServerDS:Clean">
+        <MSBuild Projects="FileServerDS.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FileServerDS:Make">
+        <MSBuild Projects="FileServerDS.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FlieClient">
+        <MSBuild Projects="..\Client\FlieClient.dproj"/>
+    </Target>
+    <Target Name="FlieClient:Clean">
+        <MSBuild Projects="..\Client\FlieClient.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FlieClient:Make">
+        <MSBuild Projects="..\Client\FlieClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="FileServerDS;FlieClient"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="FileServerDS:Clean;FlieClient:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="FileServerDS:Make;FlieClient:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

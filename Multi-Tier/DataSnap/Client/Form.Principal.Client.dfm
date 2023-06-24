@@ -18,7 +18,7 @@ object frmPrincipalClient: TfrmPrincipalClient
     Top = 0
     Width = 1016
     Height = 728
-    ActivePage = TabDataSet
+    ActivePage = TabListas
     Align = alClient
     TabOrder = 0
     object TabJSON: TTabSheet
@@ -52,7 +52,6 @@ object frmPrincipalClient: TfrmPrincipalClient
           Caption = 'Desserealizar'
           TabOrder = 1
           OnClick = ButtonDesserealizarClick
-          ExplicitLeft = 4
         end
       end
       object MemoJSON: TMemo
@@ -63,10 +62,6 @@ object frmPrincipalClient: TfrmPrincipalClient
         Height = 632
         Align = alClient
         TabOrder = 1
-        ExplicitLeft = 416
-        ExplicitTop = 304
-        ExplicitWidth = 185
-        ExplicitHeight = 89
       end
     end
     object TabDataSnap: TTabSheet
@@ -123,9 +118,6 @@ object frmPrincipalClient: TfrmPrincipalClient
             Caption = 'Envia Pessoa'
             TabOrder = 0
             OnClick = ButtonDataSnapNativoEnviaClick
-            ExplicitLeft = 32
-            ExplicitTop = 63
-            ExplicitWidth = 185
           end
           object MemoDataSnapNativoEnvia: TMemo
             Left = 1
@@ -143,10 +135,6 @@ object frmPrincipalClient: TfrmPrincipalClient
               #9'"ativo": false'
               '}')
             TabOrder = 1
-            ExplicitLeft = 88
-            ExplicitTop = 78
-            ExplicitWidth = 193
-            ExplicitHeight = 193
           end
         end
         object Panel2: TPanel
@@ -165,9 +153,6 @@ object frmPrincipalClient: TfrmPrincipalClient
             Caption = 'Recebe Pessoa'
             TabOrder = 0
             OnClick = ButtonDataSnapNativoRecebeClick
-            ExplicitLeft = 0
-            ExplicitTop = 123
-            ExplicitWidth = 185
           end
           object MemoDataSnapNativoRecebe: TMemo
             Left = 1
@@ -176,10 +161,6 @@ object frmPrincipalClient: TfrmPrincipalClient
             Height = 209
             Align = alClient
             TabOrder = 1
-            ExplicitLeft = -8
-            ExplicitTop = 48
-            ExplicitWidth = 193
-            ExplicitHeight = 193
           end
         end
       end
@@ -193,10 +174,6 @@ object frmPrincipalClient: TfrmPrincipalClient
         Color = clSkyBlue
         ParentBackground = False
         TabOrder = 1
-        ExplicitLeft = 416
-        ExplicitTop = 328
-        ExplicitWidth = 185
-        ExplicitHeight = 41
         object Label2: TLabel
           Left = 1
           Top = 1
@@ -219,8 +196,6 @@ object frmPrincipalClient: TfrmPrincipalClient
           Height = 356
           Align = alLeft
           TabOrder = 0
-          ExplicitLeft = 9
-          ExplicitTop = 33
           object ButtonDSNaoNativoEnvia: TButton
             Left = 1
             Top = 1
@@ -247,10 +222,6 @@ object frmPrincipalClient: TfrmPrincipalClient
               #9'"ativo": false'
               '}')
             TabOrder = 1
-            ExplicitLeft = 88
-            ExplicitTop = 78
-            ExplicitWidth = 193
-            ExplicitHeight = 193
           end
         end
         object Panel4: TPanel
@@ -260,8 +231,6 @@ object frmPrincipalClient: TfrmPrincipalClient
           Height = 356
           Align = alLeft
           TabOrder = 1
-          ExplicitLeft = 289
-          ExplicitTop = 33
           object ButtonDSNaoNativoRecebe: TButton
             Left = 1
             Top = 1
@@ -304,9 +273,6 @@ object frmPrincipalClient: TfrmPrincipalClient
           Caption = 'Current Thread  ID'
           TabOrder = 0
           OnClick = ButtonCurrentThreadIDClick
-          ExplicitLeft = 1
-          ExplicitTop = 1
-          ExplicitHeight = 52
         end
         object ButtonGetThreadID: TButton
           AlignWithMargins = True
@@ -318,8 +284,6 @@ object frmPrincipalClient: TfrmPrincipalClient
           Caption = 'Get Thread ID'
           TabOrder = 1
           OnClick = ButtonGetThreadIDClick
-          ExplicitLeft = 308
-          ExplicitTop = 0
         end
         object ButtonMetodoDemorado: TButton
           AlignWithMargins = True
@@ -331,8 +295,6 @@ object frmPrincipalClient: TfrmPrincipalClient
           Caption = 'M'#233'todo Demorado'
           TabOrder = 2
           OnClick = ButtonMetodoDemoradoClick
-          ExplicitLeft = 482
-          ExplicitTop = 0
         end
         object ButtonGetLog: TButton
           AlignWithMargins = True
@@ -344,8 +306,6 @@ object frmPrincipalClient: TfrmPrincipalClient
           Caption = 'Log Server'
           TabOrder = 3
           OnClick = ButtonGetLogClick
-          ExplicitLeft = 720
-          ExplicitTop = -3
         end
       end
       object MemoThreads: TMemo
@@ -357,10 +317,6 @@ object frmPrincipalClient: TfrmPrincipalClient
         Align = alClient
         Color = clInfoBk
         TabOrder = 1
-        ExplicitLeft = 416
-        ExplicitTop = 304
-        ExplicitWidth = 185
-        ExplicitHeight = 89
       end
     end
     object TabDataSet: TTabSheet
@@ -374,6 +330,7 @@ object frmPrincipalClient: TfrmPrincipalClient
         Height = 278
         Align = alTop
         TabOrder = 0
+        ExplicitWidth = 996
         object DBNavigator1: TDBNavigator
           Left = 1
           Top = 42
@@ -382,8 +339,7 @@ object frmPrincipalClient: TfrmPrincipalClient
           DataSource = dtsPessoa
           Align = alTop
           TabOrder = 0
-          ExplicitLeft = -7
-          ExplicitTop = 177
+          ExplicitWidth = 994
         end
         object DBGrid1: TDBGrid
           Left = 1
@@ -433,9 +389,7 @@ object frmPrincipalClient: TfrmPrincipalClient
           Height = 41
           Align = alTop
           TabOrder = 2
-          ExplicitLeft = 224
-          ExplicitTop = 237
-          ExplicitWidth = 489
+          ExplicitWidth = 994
           object Label3: TLabel
             Left = 1
             Top = 1
@@ -461,7 +415,7 @@ object frmPrincipalClient: TfrmPrincipalClient
             Caption = 'Load'
             TabOrder = 0
             OnClick = Button1Click
-            ExplicitLeft = 410
+            ExplicitLeft = 753
           end
           object Button2: TButton
             AlignWithMargins = True
@@ -473,7 +427,7 @@ object frmPrincipalClient: TfrmPrincipalClient
             Caption = 'Save'
             TabOrder = 1
             OnClick = Button2Click
-            ExplicitLeft = 329
+            ExplicitLeft = 672
           end
           object Button3: TButton
             AlignWithMargins = True
@@ -485,7 +439,7 @@ object frmPrincipalClient: TfrmPrincipalClient
             Caption = 'Delta'
             TabOrder = 2
             OnClick = Button3Click
-            ExplicitLeft = 329
+            ExplicitLeft = 591
           end
           object Button4: TButton
             AlignWithMargins = True
@@ -497,8 +451,7 @@ object frmPrincipalClient: TfrmPrincipalClient
             Caption = 'Get Server'
             TabOrder = 3
             OnClick = Button4Click
-            ExplicitLeft = 942
-            ExplicitTop = -4
+            ExplicitLeft = 834
           end
           object Button5: TButton
             AlignWithMargins = True
@@ -510,8 +463,7 @@ object frmPrincipalClient: TfrmPrincipalClient
             Caption = 'Set Server'
             TabOrder = 4
             OnClick = Button5Click
-            ExplicitLeft = 984
-            ExplicitTop = 2
+            ExplicitLeft = 915
           end
         end
       end
@@ -523,6 +475,7 @@ object frmPrincipalClient: TfrmPrincipalClient
         Height = 234
         Align = alTop
         TabOrder = 1
+        ExplicitWidth = 996
         object Label4: TLabel
           Left = 1
           Top = 1
@@ -561,10 +514,8 @@ object frmPrincipalClient: TfrmPrincipalClient
         Height = 168
         Align = alClient
         TabOrder = 2
-        ExplicitLeft = 144
-        ExplicitTop = 616
-        ExplicitWidth = 185
-        ExplicitHeight = 41
+        ExplicitWidth = 996
+        ExplicitHeight = 159
         object Panel10: TPanel
           AlignWithMargins = True
           Left = 4
@@ -573,6 +524,7 @@ object frmPrincipalClient: TfrmPrincipalClient
           Height = 160
           Align = alLeft
           TabOrder = 0
+          ExplicitHeight = 151
           object Label5: TLabel
             Left = 1
             Top = 1
@@ -611,6 +563,7 @@ object frmPrincipalClient: TfrmPrincipalClient
           Height = 160
           Align = alLeft
           TabOrder = 1
+          ExplicitHeight = 151
           object Label6: TLabel
             Left = 1
             Top = 1
@@ -649,10 +602,8 @@ object frmPrincipalClient: TfrmPrincipalClient
           Height = 160
           Align = alClient
           TabOrder = 2
-          ExplicitLeft = 200
-          ExplicitTop = 592
-          ExplicitWidth = 185
-          ExplicitHeight = 41
+          ExplicitWidth = 329
+          ExplicitHeight = 151
           object Label7: TLabel
             Left = 1
             Top = 1
@@ -682,6 +633,178 @@ object frmPrincipalClient: TfrmPrincipalClient
             TitleFont.Name = 'Segoe UI'
             TitleFont.Style = []
           end
+        end
+      end
+    end
+    object TabHash: TTabSheet
+      Caption = 'Hash'
+      ImageIndex = 4
+      object Splitter3: TSplitter
+        Left = 820
+        Top = 0
+        Height = 698
+        Align = alRight
+        ExplicitLeft = 504
+        ExplicitTop = 296
+        ExplicitHeight = 100
+      end
+      object PanelHash: TPanel
+        Left = 823
+        Top = 0
+        Width = 185
+        Height = 698
+        Align = alRight
+        TabOrder = 0
+        ExplicitLeft = 416
+        ExplicitTop = 328
+        ExplicitHeight = 41
+        object Splitter2: TSplitter
+          Left = 1
+          Top = 96
+          Width = 183
+          Height = 3
+          Cursor = crVSplit
+          Align = alTop
+          ExplicitTop = 93
+        end
+        object MemoDados: TMemo
+          AlignWithMargins = True
+          Left = 4
+          Top = 4
+          Width = 177
+          Height = 89
+          Align = alTop
+          TabOrder = 0
+          OnChange = MemoDadosChange
+          ExplicitLeft = 8
+          ExplicitTop = 12
+        end
+        object MemoHash: TMemo
+          AlignWithMargins = True
+          Left = 4
+          Top = 102
+          Width = 177
+          Height = 592
+          Align = alClient
+          Color = clInactiveCaption
+          TabOrder = 1
+          ExplicitTop = 698
+          ExplicitHeight = 0
+        end
+      end
+      object Panel13: TPanel
+        Left = 0
+        Top = 0
+        Width = 820
+        Height = 698
+        Align = alClient
+        TabOrder = 1
+        ExplicitLeft = 416
+        ExplicitTop = 328
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+        object EditSenha: TEdit
+          Left = 16
+          Top = 16
+          Width = 121
+          Height = 23
+          TabOrder = 0
+          TextHint = 'Informe a senha'
+        end
+        object Button6: TButton
+          Left = 160
+          Top = 15
+          Width = 105
+          Height = 25
+          Caption = 'Autenticar'
+          TabOrder = 1
+          OnClick = Button6Click
+        end
+        object MemoRespostaHash: TMemo
+          AlignWithMargins = True
+          Left = 4
+          Top = 376
+          Width = 812
+          Height = 318
+          Align = alBottom
+          Color = clMedGray
+          TabOrder = 2
+        end
+      end
+    end
+    object TabListas: TTabSheet
+      Caption = 'Listas'
+      ImageIndex = 5
+      object MemoRetornoListas: TMemo
+        AlignWithMargins = True
+        Left = 3
+        Top = 50
+        Width = 1002
+        Height = 645
+        Align = alClient
+        Color = clInactiveCaption
+        TabOrder = 0
+        ExplicitTop = 272
+        ExplicitHeight = 423
+      end
+      object Panel14: TPanel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 1002
+        Height = 41
+        Align = alTop
+        TabOrder = 1
+        ExplicitLeft = 208
+        ExplicitTop = 152
+        ExplicitWidth = 185
+        object ButtonRetornoResponse: TButton
+          AlignWithMargins = True
+          Left = 266
+          Top = 4
+          Width = 125
+          Height = 33
+          Align = alLeft
+          Caption = 'Retorno no Response'
+          TabOrder = 0
+          OnClick = ButtonRetornoResponseClick
+        end
+        object ButtonListaString: TButton
+          AlignWithMargins = True
+          Left = 135
+          Top = 4
+          Width = 125
+          Height = 33
+          Align = alLeft
+          Caption = 'Retorno Lista String'
+          TabOrder = 1
+          OnClick = ButtonListaStringClick
+        end
+        object ButtonListaDataSnap: TButton
+          AlignWithMargins = True
+          Left = 4
+          Top = 4
+          Width = 125
+          Height = 33
+          Align = alLeft
+          Caption = 'Lista DataSnap'
+          TabOrder = 2
+          OnClick = ButtonListaDataSnapClick
+        end
+        object EditQtdPessoa: TEdit
+          AlignWithMargins = True
+          Left = 856
+          Top = 8
+          Width = 142
+          Height = 25
+          Margins.Top = 7
+          Margins.Bottom = 7
+          Align = alRight
+          NumbersOnly = True
+          TabOrder = 3
+          TextHint = 'Qtd Pessoas'
+          ExplicitTop = 4
+          ExplicitHeight = 33
         end
       end
     end
@@ -785,5 +908,21 @@ object frmPrincipalClient: TfrmPrincipalClient
     UpdateOptions.AutoCommitUpdates = True
     Left = 848
     Top = 472
+  end
+  object IdHTTP1: TIdHTTP
+    ProxyParams.BasicAuthentication = False
+    ProxyParams.ProxyPort = 0
+    Request.ContentLength = -1
+    Request.ContentRangeEnd = -1
+    Request.ContentRangeStart = -1
+    Request.ContentRangeInstanceLength = -1
+    Request.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    Request.BasicAuthentication = False
+    Request.UserAgent = 'Mozilla/3.0 (compatible; Indy Library)'
+    Request.Ranges.Units = 'bytes'
+    Request.Ranges = <>
+    HTTPOptions = [hoForceEncodeParams]
+    Left = 824
+    Top = 160
   end
 end

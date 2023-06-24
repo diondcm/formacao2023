@@ -3,9 +3,14 @@ unit Classe.Pessoa;
 interface
 
 uses
-  System.SysUtils;
+  System.SysUtils, System.Generics.Collections;
 
 type
+  TPessoa = class;
+
+  TListaPessoa = class(TObjectList<TPessoa>)
+  end;
+
   // "Classe de transporte": Leva infos de Cliet -> Server e vice-versa
   TPessoa = class
   private

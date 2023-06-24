@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 17/06/2023 16:36:06
+// 24/06/2023 11:39:15
 //
 
 unit ClientClassesUnit1;
@@ -12,6 +12,7 @@ uses System.JSON, Datasnap.DSProxyRest, Datasnap.DSClientRest, Data.DBXCommon, D
 type
 
   IDSRestCachedTPessoa = interface;
+  IDSRestCachedTListaPessoa = interface;
 
   TServerMethods1Client = class(TDSAdminRestClient)
   private
@@ -24,6 +25,10 @@ type
     FSetPessoaNativoCommand: TDSRestCommand;
     FGetPessoaNaoNativoCommand: TDSRestCommand;
     FSetPessoaNaoNativoCommand: TDSRestCommand;
+    FGetListaPessoaCommand: TDSRestCommand;
+    FGetListaPessoaCommand_Cache: TDSRestCommand;
+    FGetListaPessoaGeralCommand: TDSRestCommand;
+    FGetListaPessoaGeral2Command: TDSRestCommand;
     FGetThreadIDCommand: TDSRestCommand;
     FGetQtdThreadsAtivasCommand: TDSRestCommand;
     FGetQtdMaxThreadsCommand: TDSRestCommand;
@@ -31,6 +36,7 @@ type
     FGetLogCommand: TDSRestCommand;
     FGetPessoasDBCommand: TDSRestCommand;
     FSetPessoasDBCommand: TDSRestCommand;
+    FAutenticaUsuarioCommand: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
@@ -44,6 +50,10 @@ type
     function SetPessoaNativo(pes: TPessoa; const ARequestFilter: string = ''): Boolean;
     function GetPessoaNaoNativo(const ARequestFilter: string = ''): string;
     function SetPessoaNaoNativo(pessoa: string; const ARequestFilter: string = ''): Boolean;
+    function GetListaPessoa(Count: Integer; const ARequestFilter: string = ''): TListaPessoa;
+    function GetListaPessoa_Cache(Count: Integer; const ARequestFilter: string = ''): IDSRestCachedTListaPessoa;
+    function GetListaPessoaGeral(Count: Integer; const ARequestFilter: string = ''): string;
+    function GetListaPessoaGeral2(Count: Integer; const ARequestFilter: string = ''): string;
     function GetThreadID(const ARequestFilter: string = ''): Cardinal;
     function GetQtdThreadsAtivas(const ARequestFilter: string = ''): Integer;
     function GetQtdMaxThreads(const ARequestFilter: string = ''): Integer;
@@ -51,12 +61,18 @@ type
     function GetLog(const ARequestFilter: string = ''): string;
     function GetPessoasDB(const ARequestFilter: string = ''): string;
     function SetPessoasDB(dbPessoas: string; const ARequestFilter: string = ''): Boolean;
+    function AutenticaUsuario(senha: string; const ARequestFilter: string = ''): string;
   end;
 
   IDSRestCachedTPessoa = interface(IDSRestCachedObject<TPessoa>)
   end;
 
   TDSRestCachedTPessoa = class(TDSRestCachedObject<TPessoa>, IDSRestCachedTPessoa, IDSRestCachedCommand)
+  end;
+  IDSRestCachedTListaPessoa = interface(IDSRestCachedObject<TListaPessoa>)
+  end;
+
+  TDSRestCachedTListaPessoa = class(TDSRestCachedObject<TListaPessoa>, IDSRestCachedTListaPessoa, IDSRestCachedCommand)
   end;
 
 const
@@ -109,6 +125,30 @@ const
     (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
   );
 
+  TServerMethods1_GetListaPessoa: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'Count'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TListaPessoa')
+  );
+
+  TServerMethods1_GetListaPessoa_Cache: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'Count'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TServerMethods1_GetListaPessoaGeral: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'Count'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
+  TServerMethods1_GetListaPessoaGeral2: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'Count'; Direction: 1; DBXType: 6; TypeName: 'Integer'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
   TServerMethods1_GetThreadID: array [0..0] of TDSRestParameterMetaData =
   (
     (Name: ''; Direction: 4; DBXType: 13; TypeName: 'Cardinal')
@@ -144,6 +184,12 @@ const
   (
     (Name: 'dbPessoas'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+  );
+
+  TServerMethods1_AutenticaUsuario: array [0..1] of TDSRestParameterMetaData =
+  (
+    (Name: 'senha'; Direction: 1; DBXType: 26; TypeName: 'string'),
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
   );
 
 implementation
@@ -317,6 +363,74 @@ begin
   Result := FSetPessoaNaoNativoCommand.Parameters[1].Value.GetBoolean;
 end;
 
+function TServerMethods1Client.GetListaPessoa(Count: Integer; const ARequestFilter: string): TListaPessoa;
+begin
+  if FGetListaPessoaCommand = nil then
+  begin
+    FGetListaPessoaCommand := FConnection.CreateCommand;
+    FGetListaPessoaCommand.RequestType := 'GET';
+    FGetListaPessoaCommand.Text := 'TServerMethods1.GetListaPessoa';
+    FGetListaPessoaCommand.Prepare(TServerMethods1_GetListaPessoa);
+  end;
+  FGetListaPessoaCommand.Parameters[0].Value.SetInt32(Count);
+  FGetListaPessoaCommand.Execute(ARequestFilter);
+  if not FGetListaPessoaCommand.Parameters[1].Value.IsNull then
+  begin
+    FUnMarshal := TDSRestCommand(FGetListaPessoaCommand.Parameters[1].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TListaPessoa(FUnMarshal.UnMarshal(FGetListaPessoaCommand.Parameters[1].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FGetListaPessoaCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
+end;
+
+function TServerMethods1Client.GetListaPessoa_Cache(Count: Integer; const ARequestFilter: string): IDSRestCachedTListaPessoa;
+begin
+  if FGetListaPessoaCommand_Cache = nil then
+  begin
+    FGetListaPessoaCommand_Cache := FConnection.CreateCommand;
+    FGetListaPessoaCommand_Cache.RequestType := 'GET';
+    FGetListaPessoaCommand_Cache.Text := 'TServerMethods1.GetListaPessoa';
+    FGetListaPessoaCommand_Cache.Prepare(TServerMethods1_GetListaPessoa_Cache);
+  end;
+  FGetListaPessoaCommand_Cache.Parameters[0].Value.SetInt32(Count);
+  FGetListaPessoaCommand_Cache.ExecuteCache(ARequestFilter);
+  Result := TDSRestCachedTListaPessoa.Create(FGetListaPessoaCommand_Cache.Parameters[1].Value.GetString);
+end;
+
+function TServerMethods1Client.GetListaPessoaGeral(Count: Integer; const ARequestFilter: string): string;
+begin
+  if FGetListaPessoaGeralCommand = nil then
+  begin
+    FGetListaPessoaGeralCommand := FConnection.CreateCommand;
+    FGetListaPessoaGeralCommand.RequestType := 'GET';
+    FGetListaPessoaGeralCommand.Text := 'TServerMethods1.GetListaPessoaGeral';
+    FGetListaPessoaGeralCommand.Prepare(TServerMethods1_GetListaPessoaGeral);
+  end;
+  FGetListaPessoaGeralCommand.Parameters[0].Value.SetInt32(Count);
+  FGetListaPessoaGeralCommand.Execute(ARequestFilter);
+  Result := FGetListaPessoaGeralCommand.Parameters[1].Value.GetWideString;
+end;
+
+function TServerMethods1Client.GetListaPessoaGeral2(Count: Integer; const ARequestFilter: string): string;
+begin
+  if FGetListaPessoaGeral2Command = nil then
+  begin
+    FGetListaPessoaGeral2Command := FConnection.CreateCommand;
+    FGetListaPessoaGeral2Command.RequestType := 'GET';
+    FGetListaPessoaGeral2Command.Text := 'TServerMethods1.GetListaPessoaGeral2';
+    FGetListaPessoaGeral2Command.Prepare(TServerMethods1_GetListaPessoaGeral2);
+  end;
+  FGetListaPessoaGeral2Command.Parameters[0].Value.SetInt32(Count);
+  FGetListaPessoaGeral2Command.Execute(ARequestFilter);
+  Result := FGetListaPessoaGeral2Command.Parameters[1].Value.GetWideString;
+end;
+
 function TServerMethods1Client.GetThreadID(const ARequestFilter: string): Cardinal;
 begin
   if FGetThreadIDCommand = nil then
@@ -410,6 +524,20 @@ begin
   Result := FSetPessoasDBCommand.Parameters[1].Value.GetBoolean;
 end;
 
+function TServerMethods1Client.AutenticaUsuario(senha: string; const ARequestFilter: string): string;
+begin
+  if FAutenticaUsuarioCommand = nil then
+  begin
+    FAutenticaUsuarioCommand := FConnection.CreateCommand;
+    FAutenticaUsuarioCommand.RequestType := 'GET';
+    FAutenticaUsuarioCommand.Text := 'TServerMethods1.AutenticaUsuario';
+    FAutenticaUsuarioCommand.Prepare(TServerMethods1_AutenticaUsuario);
+  end;
+  FAutenticaUsuarioCommand.Parameters[0].Value.SetWideString(senha);
+  FAutenticaUsuarioCommand.Execute(ARequestFilter);
+  Result := FAutenticaUsuarioCommand.Parameters[1].Value.GetWideString;
+end;
+
 constructor TServerMethods1Client.Create(ARestConnection: TDSRestConnection);
 begin
   inherited Create(ARestConnection);
@@ -431,6 +559,10 @@ begin
   FSetPessoaNativoCommand.DisposeOf;
   FGetPessoaNaoNativoCommand.DisposeOf;
   FSetPessoaNaoNativoCommand.DisposeOf;
+  FGetListaPessoaCommand.DisposeOf;
+  FGetListaPessoaCommand_Cache.DisposeOf;
+  FGetListaPessoaGeralCommand.DisposeOf;
+  FGetListaPessoaGeral2Command.DisposeOf;
   FGetThreadIDCommand.DisposeOf;
   FGetQtdThreadsAtivasCommand.DisposeOf;
   FGetQtdMaxThreadsCommand.DisposeOf;
@@ -438,6 +570,7 @@ begin
   FGetLogCommand.DisposeOf;
   FGetPessoasDBCommand.DisposeOf;
   FSetPessoasDBCommand.DisposeOf;
+  FAutenticaUsuarioCommand.DisposeOf;
   inherited;
 end;
 

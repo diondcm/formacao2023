@@ -11,6 +11,8 @@ uses System.SysUtils, System.Classes, System.Json, REST.Json,
   FireDAC.Stan.StorageBin;
 
 type
+  TPessoaArray = TArray<TPessoa>;
+
   TServerMethods1 = class(TDSServerModule)
     memPessoa: TFDMemTable;
     memPessoaID: TIntegerField;
@@ -40,6 +42,13 @@ type
     function GetPessoaNaoNativo: string;
     function SetPessoaNaoNativo(pessoa: string): Boolean;
 
+    function GetListaPessoaArray(Count: Integer): TArray<TPessoa>;
+    function GetListaPessoaArray2(Count: Integer): TPessoaArray;
+
+    function GetListaPessoa(Count: Integer): TListaPessoa;
+    function GetListaPessoaGeral(Count: Integer): string;
+    function GetListaPessoaGeral2(Count: Integer): string;
+
     {Threads no server}
     function GetThreadID: Cardinal;
     function GetQtdThreadsAtivas: Integer;
@@ -51,6 +60,9 @@ type
     { DB }
     function GetPessoasDB: string;
     function SetPessoasDB(dbPessoas: string): Boolean;
+
+    { Hash }
+    function AutenticaUsuario(senha: string): string;
   end;
 
 implementation
@@ -59,7 +71,22 @@ implementation
 {$R *.dfm}
 
 
-uses System.StrUtils, Winapi.Windows;
+uses System.StrUtils, Winapi.Windows, System.Hash, Data.DBXPlatform;
+
+function TServerMethods1.AutenticaUsuario(senha: string): string;
+const
+  SENHA_ESTATICA = 'çjrlt345' + 'Aula 2020';
+begin
+  // Buscar a informação de um banco de dados poderia validar numa chave de registro
+//  if senha = SENHA_ESTATICA then
+
+  if CompareStr(senha, THashSHA2.GetHashString(SENHA_ESTATICA)) = 0 then
+  begin
+    Result := 'OK';
+  end else begin
+    Result := 'Erro: senha inválida';
+  end;
+end;
 
 class constructor TServerMethods1.Create;
 begin
@@ -92,6 +119,52 @@ end;
 function TServerMethods1.EchoString(Value: string): string;
 begin
   Result := Value;
+end;
+
+function TServerMethods1.GetListaPessoa(Count: Integer): TListaPessoa;
+begin
+  Result := TListaPessoa.Create(True);
+  Result.AddRange(GetListaPessoaArray(Count));// Para liberar colocar como rei de dentro da lista
+end;
+
+function TServerMethods1.GetListaPessoaArray(Count: Integer): TArray<TPessoa>;
+begin
+  /// Não pode ter retorno diarrei a gente tem
+  /// que sintetizar em outra classe para poder retornar
+
+  if Count = 0 then
+   Count := 10;
+
+  for var i: Integer := 0 to Count -1 do
+  begin
+    var pes: TPessoa := TPessoa.Create;
+    pes.ID := GetTickCount;
+    pes.Nome := 'Teste ' + IntToStr(pes.ID);
+    pes.DataNascimento := Now - Random(10000);
+    pes.Renda := Random(10000);
+
+    SetLength(Result, Length(Result) + 1);
+    Result[Length(Result) - 1] := pes;
+  end;
+end;
+
+function TServerMethods1.GetListaPessoaArray2(Count: Integer): TPessoaArray;
+begin
+  Result := GetListaPessoaArray(Count);
+end;
+
+function TServerMethods1.GetListaPessoaGeral(Count: Integer): string;
+begin
+  var lstPes: TListaPessoa := GetListaPessoa(Count);
+  Result := TJson.ObjectToJsonString(lstPes);
+  lstPes.Free;
+end;
+
+function TServerMethods1.GetListaPessoaGeral2(Count: Integer): string;
+begin
+  // Data.DBXPlatform
+  GetInvocationMetadata().ResponseContentType := 'application/json';
+  GetInvocationMetadata().ResponseContent := GetListaPessoaGeral(Count);
 end;
 
 function TServerMethods1.GetLog: string;

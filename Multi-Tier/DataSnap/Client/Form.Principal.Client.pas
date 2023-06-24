@@ -8,7 +8,8 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   Data.DB, Vcl.DBCtrls, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids,
-  Vcl.DBGrids, FireDAC.Stan.StorageBin, FireDAC.Stan.StorageJSON;
+  Vcl.DBGrids, FireDAC.Stan.StorageBin, FireDAC.Stan.StorageJSON, System.Hash, System.NetEncoding,
+  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP;
 
 type
   TfrmPrincipalClient = class(TForm)
@@ -82,6 +83,24 @@ type
     memAlterados: TFDMemTable;
     Button4: TButton;
     Button5: TButton;
+    TabHash: TTabSheet;
+    PanelHash: TPanel;
+    MemoDados: TMemo;
+    Splitter2: TSplitter;
+    MemoHash: TMemo;
+    Panel13: TPanel;
+    Splitter3: TSplitter;
+    EditSenha: TEdit;
+    Button6: TButton;
+    MemoRespostaHash: TMemo;
+    TabListas: TTabSheet;
+    MemoRetornoListas: TMemo;
+    Panel14: TPanel;
+    ButtonRetornoResponse: TButton;
+    ButtonListaString: TButton;
+    ButtonListaDataSnap: TButton;
+    EditQtdPessoa: TEdit;
+    IdHTTP1: TIdHTTP;
     procedure ButtonSerealizarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ButtonDesserealizarClick(Sender: TObject);
@@ -98,6 +117,11 @@ type
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
+    procedure MemoDadosChange(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure ButtonListaDataSnapClick(Sender: TObject);
+    procedure ButtonListaStringClick(Sender: TObject);
+    procedure ButtonRetornoResponseClick(Sender: TObject);
   private
     const
       DB_PESSOA = 'DB-Pessoa.json';
@@ -112,7 +136,7 @@ implementation
 
 {$R *.dfm}
 
-uses Classe.Pessoa, ClientModuleUnit1;
+uses Classe.Pessoa, ClientModuleUnit1, System.StrUtils;
 
 procedure TfrmPrincipalClient.ButtonDataSnapNativoRecebeClick(Sender: TObject);
 begin
@@ -126,6 +150,18 @@ end;
 procedure TfrmPrincipalClient.ButtonMetodoDemoradoClick(Sender: TObject);
 begin
   ClientModule1.ServerMethods1Client.GetMetodoDemorado(10000);
+end;
+
+procedure TfrmPrincipalClient.ButtonRetornoResponseClick(Sender: TObject);
+begin
+//  MemoRetornoListas.Text := ClientModule1.ServerMethods1Client.GetListaPessoaGeral2(StrToIntDef(EditQtdPessoa.Text, 0));
+  var strStm: TStringStream := TStringStream.Create;
+  try
+    IdHTTP1.Get('http://192.168.15.9:8080/datasnap/rest/TServerMethods1/GetListaPessoaGeral2/' + IfThen(EditQtdPessoa.Text = '', '0', EditQtdPessoa.Text) , strStm);
+    MemoRetornoListas.Text := strStm.DataString;
+  finally
+    strStm.Free;
+  end;
 end;
 
 procedure TfrmPrincipalClient.Button1Click(Sender: TObject);
@@ -176,6 +212,11 @@ begin
   memPessoa.SaveToStream(strStm, sfJSON);
   ClientModule1.ServerMethods1Client.SetPessoasDB(strStm.DataString);
   strStm.Free;
+end;
+
+procedure TfrmPrincipalClient.Button6Click(Sender: TObject);
+begin
+  MemoRespostaHash.Lines.Insert(0, ClientModule1.ServerMethods1Client.AutenticaUsuario(THashSHA2.GetHashString(EditSenha.Text + 'Aula 2020')));
 end;
 
 procedure TfrmPrincipalClient.ButtonCurrentThreadIDClick(Sender: TObject);
@@ -232,6 +273,17 @@ begin
   MemoThreads.Lines.Insert(0, IntToStr(ClientModule1.ServerMethods1Client.GetThreadID));
 end;
 
+procedure TfrmPrincipalClient.ButtonListaDataSnapClick(Sender: TObject);
+begin
+  var lstPes: TListaPessoa := ClientModule1.ServerMethods1Client.GetListaPessoa(StrToIntDef(EditQtdPessoa.Text, 0));
+  MemoRetornoListas.Text := TJson.ObjectToJsonString(lstPes);
+end;
+
+procedure TfrmPrincipalClient.ButtonListaStringClick(Sender: TObject);
+begin
+  MemoRetornoListas.Text := ClientModule1.ServerMethods1Client.GetListaPessoaGeral(StrToIntDef(EditQtdPessoa.Text, 0));
+end;
+
 procedure TfrmPrincipalClient.ButtonSerealizarClick(Sender: TObject);
 begin
   var pessoa: TPessoa := TPessoa.Create;
@@ -259,7 +311,14 @@ procedure TfrmPrincipalClient.FormCreate(Sender: TObject);
 begin
   ReportMemoryLeaksOnShutdown := True;
 
+  memPessoa.CachedUpdates := True;
   memPessoa.Open;
+end;
+
+procedure TfrmPrincipalClient.MemoDadosChange(Sender: TObject);
+begin // System.Hash, System.NetEncoding
+  MemoHash.Lines.Add(THashSHA2.GetHashString(MemoDados.Text));
+
 end;
 
 end.
