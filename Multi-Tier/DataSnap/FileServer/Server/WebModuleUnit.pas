@@ -9,13 +9,14 @@ uses
   DataSnap.DSAuth,
   Datasnap.DSProxyJavaScript, IPPeerServer, Datasnap.DSMetadata,
   Datasnap.DSServerMetadata, Datasnap.DSClientMetadata, Datasnap.DSCommonServer,
-  Datasnap.DSHTTP, Server.Methods.Files, Server.Methods.BlockChain;
+  Datasnap.DSHTTP, Server.Methods.Files, Server.Methods.BlockChain,
+  Server.Methods.Produto;
 
 type
   TWebModule1 = class(TWebModule)
     DSHTTPWebDispatcher1: TDSHTTPWebDispatcher;
     DSServer1: TDSServer;
-    DSServerClass1: TDSServerClass;
+    DSServerClassGeral: TDSServerClass;
     ServerFunctionInvoker: TPageProducer;
     ReverseString: TPageProducer;
     WebFileDispatcher1: TWebFileDispatcher;
@@ -23,7 +24,8 @@ type
     DSServerMetaDataProvider1: TDSServerMetaDataProvider;
     DSServerClassFiles: TDSServerClass;
     DSServerClassBlockChain: TDSServerClass;
-    procedure DSServerClass1GetClass(DSServerClass: TDSServerClass;
+    DSServerClassProduto: TDSServerClass;
+    procedure DSServerClassGeralGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure ServerFunctionInvokerHTMLTag(Sender: TObject; Tag: TTag;
       const TagString: string; TagParams: TStrings; var ReplaceText: string);
@@ -38,6 +40,8 @@ type
     procedure DSServerClassFilesGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
     procedure DSServerClassBlockChainGetClass(DSServerClass: TDSServerClass;
+      var PersistentClass: TPersistentClass);
+    procedure DSServerClassProdutoGetClass(DSServerClass: TDSServerClass;
       var PersistentClass: TPersistentClass);
   private
     { Private declarations }
@@ -57,10 +61,16 @@ implementation
 
 uses Server.Methods.Geral, Web.WebReq;
 
-procedure TWebModule1.DSServerClass1GetClass(
+procedure TWebModule1.DSServerClassGeralGetClass(
   DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
 begin
   PersistentClass := Server.Methods.Geral.TSMGeral;
+end;
+
+procedure TWebModule1.DSServerClassProdutoGetClass(DSServerClass: TDSServerClass;
+  var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := Server.Methods.Produto.TSMProduto;
 end;
 
 procedure TWebModule1.DSServerClassBlockChainGetClass(

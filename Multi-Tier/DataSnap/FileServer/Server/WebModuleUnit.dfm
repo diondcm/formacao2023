@@ -32,9 +32,10 @@ object WebModule1: TWebModule1
     Left = 120
     Top = 94
   end
-  object DSServerClass1: TDSServerClass
-    OnGetClass = DSServerClass1GetClass
+  object DSServerClassGeral: TDSServerClass
+    OnGetClass = DSServerClassGeralGetClass
     Server = DSServer1
+    LifeCycle = 'Server'
     Left = 250
     Top = 14
   end
@@ -114,5 +115,11 @@ object WebModule1: TWebModule1
     Server = DSServer1
     Left = 306
     Top = 150
+  end
+  object DSServerClassProduto: TDSServerClass
+    OnGetClass = DSServerClassProdutoGetClass
+    Server = DSServer1
+    Left = 314
+    Top = 222
   end
 end

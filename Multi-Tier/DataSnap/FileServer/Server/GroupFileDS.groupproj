@@ -6,7 +6,10 @@
         <Projects Include="FileServerDS.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\Client\FlieClient.dproj">
+        <Projects Include="..\Client\FileClient.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\IIS\FileServerIIS.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -26,23 +29,32 @@
     <Target Name="FileServerDS:Make">
         <MSBuild Projects="FileServerDS.dproj" Targets="Make"/>
     </Target>
-    <Target Name="FlieClient">
-        <MSBuild Projects="..\Client\FlieClient.dproj"/>
+    <Target Name="FileClient">
+        <MSBuild Projects="..\Client\FileClient.dproj"/>
     </Target>
-    <Target Name="FlieClient:Clean">
-        <MSBuild Projects="..\Client\FlieClient.dproj" Targets="Clean"/>
+    <Target Name="FileClient:Clean">
+        <MSBuild Projects="..\Client\FileClient.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="FlieClient:Make">
-        <MSBuild Projects="..\Client\FlieClient.dproj" Targets="Make"/>
+    <Target Name="FileClient:Make">
+        <MSBuild Projects="..\Client\FileClient.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FileServerIIS">
+        <MSBuild Projects="..\IIS\FileServerIIS.dproj"/>
+    </Target>
+    <Target Name="FileServerIIS:Clean">
+        <MSBuild Projects="..\IIS\FileServerIIS.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FileServerIIS:Make">
+        <MSBuild Projects="..\IIS\FileServerIIS.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="FileServerDS;FlieClient"/>
+        <CallTarget Targets="FileServerDS;FileClient;FileServerIIS"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="FileServerDS:Clean;FlieClient:Clean"/>
+        <CallTarget Targets="FileServerDS:Clean;FileClient:Clean;FileServerIIS:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="FileServerDS:Make;FlieClient:Make"/>
+        <CallTarget Targets="FileServerDS:Make;FileClient:Make;FileServerIIS:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

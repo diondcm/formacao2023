@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{AC62508F-36B5-44D9-B18A-7FA0AE669189}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Client\ClienteTeste.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Test\TestaComps.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ClienteTeste">
+        <MSBuild Projects="Client\ClienteTeste.dproj"/>
+    </Target>
+    <Target Name="ClienteTeste:Clean">
+        <MSBuild Projects="Client\ClienteTeste.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ClienteTeste:Make">
+        <MSBuild Projects="Client\ClienteTeste.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TestaComps">
+        <MSBuild Projects="Test\TestaComps.dproj"/>
+    </Target>
+    <Target Name="TestaComps:Clean">
+        <MSBuild Projects="Test\TestaComps.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestaComps:Make">
+        <MSBuild Projects="Test\TestaComps.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="pkgPanelObrigatorio">
+        <MSBuild Projects="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj"/>
+    </Target>
+    <Target Name="pkgPanelObrigatorio:Clean">
+        <MSBuild Projects="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pkgPanelObrigatorio:Make">
+        <MSBuild Projects="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ClienteTeste;TestaComps;pkgPanelObrigatorio"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ClienteTeste:Clean;TestaComps:Clean;pkgPanelObrigatorio:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ClienteTeste:Make;TestaComps:Make;pkgPanelObrigatorio:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{BA7CE687-FAE6-426D-8FA7-6A9545B3D063}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="TestePkgsEDlls.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="GeraToken.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="pkgGeraToken.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="TestePkgsEDlls">
+        <MSBuild Projects="TestePkgsEDlls.dproj"/>
+    </Target>
+    <Target Name="TestePkgsEDlls:Clean">
+        <MSBuild Projects="TestePkgsEDlls.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestePkgsEDlls:Make">
+        <MSBuild Projects="TestePkgsEDlls.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GeraToken">
+        <MSBuild Projects="GeraToken.dproj"/>
+    </Target>
+    <Target Name="GeraToken:Clean">
+        <MSBuild Projects="GeraToken.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GeraToken:Make">
+        <MSBuild Projects="GeraToken.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="pkgGeraToken">
+        <MSBuild Projects="pkgGeraToken.dproj"/>
+    </Target>
+    <Target Name="pkgGeraToken:Clean">
+        <MSBuild Projects="pkgGeraToken.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pkgGeraToken:Make">
+        <MSBuild Projects="pkgGeraToken.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="TestePkgsEDlls;GeraToken;pkgGeraToken"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="TestePkgsEDlls:Clean;GeraToken:Clean;pkgGeraToken:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="TestePkgsEDlls:Make;GeraToken:Make;pkgGeraToken:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

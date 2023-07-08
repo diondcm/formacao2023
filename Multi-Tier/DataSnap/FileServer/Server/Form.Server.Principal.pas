@@ -103,6 +103,7 @@ begin
     FServer.DefaultPort := StrToInt(EditPort.Text);
     FServer.Active := True;
   end;
+
 end;
 
 end.

@@ -1,26 +1,34 @@
 //
 // Created by the DataSnap proxy generator.
-// 24/06/2023 17:06:13
+// 01/07/2023 10:42:00
 //
 
 unit ClientClassesUnit1;
 
 interface
 
-uses System.JSON, Datasnap.DSProxyRest, Datasnap.DSClientRest, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, System.Generics.Collections, Data.DBXJSONReflect;
+uses System.JSON, Datasnap.DSProxyRest, Datasnap.DSClientRest, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, System.Generics.Collections, Classe.Produtos, Data.DBXJSONReflect;
 
 type
 
   TSMGeralClient = class(TDSAdminRestClient)
   private
+    FDSServerModuleCreateCommand: TDSRestCommand;
     FEchoStringCommand: TDSRestCommand;
     FReverseStringCommand: TDSRestCommand;
+    FGetDataAtualCommand: TDSRestCommand;
+    FGetVersaoServerCommand: TDSRestCommand;
+    FGetTickAtualCommand: TDSRestCommand;
   public
     constructor Create(ARestConnection: TDSRestConnection); overload;
     constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
     destructor Destroy; override;
+    procedure DSServerModuleCreate(Sender: TObject);
     function EchoString(Value: string; const ARequestFilter: string = ''): string;
     function ReverseString(Value: string; const ARequestFilter: string = ''): string;
+    function GetDataAtual(const ARequestFilter: string = ''): TDateTime;
+    function GetVersaoServer(const ARequestFilter: string = ''): UInt64;
+    function GetTickAtual(const ARequestFilter: string = ''): UInt64;
   end;
 
   TSMFilesClient = class(TDSAdminRestClient)
@@ -58,8 +66,25 @@ type
     function GetBlockChainInfoDS(const ARequestFilter: string = ''): string;
   end;
 
+  TSMProdutoClient = class(TDSAdminRestClient)
+  private
+    FGetProdutosDelphiCommand: TDSRestCommand;
+    FGetProdutosDelphiCommand_Cache: TDSRestCommand;
+    FGetProdutosCommand: TDSRestCommand;
+  public
+    constructor Create(ARestConnection: TDSRestConnection); overload;
+    constructor Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean); overload;
+    destructor Destroy; override;
+    function GetProdutosDelphi(const ARequestFilter: string = ''): TListaProdutos;
+    function GetProdutos(const ARequestFilter: string = ''): Boolean;
+  end;
 
 const
+  TSMGeral_DSServerModuleCreate: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: 'Sender'; Direction: 1; DBXType: 37; TypeName: 'TObject')
+  );
+
   TSMGeral_EchoString: array [0..1] of TDSRestParameterMetaData =
   (
     (Name: 'Value'; Direction: 1; DBXType: 26; TypeName: 'string'),
@@ -70,6 +95,21 @@ const
   (
     (Name: 'Value'; Direction: 1; DBXType: 26; TypeName: 'string'),
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
+  );
+
+  TSMGeral_GetDataAtual: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: ''; Direction: 4; DBXType: 11; TypeName: 'TDateTime')
+  );
+
+  TSMGeral_GetVersaoServer: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: ''; Direction: 4; DBXType: 19; TypeName: 'UInt64')
+  );
+
+  TSMGeral_GetTickAtual: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: ''; Direction: 4; DBXType: 19; TypeName: 'UInt64')
   );
 
   TSMFiles_AddImagemLista: array [0..1] of TDSRestParameterMetaData =
@@ -130,7 +170,47 @@ const
     (Name: ''; Direction: 4; DBXType: 26; TypeName: 'string')
   );
 
+  TSMProduto_GetProdutosDelphi: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: ''; Direction: 4; DBXType: 37; TypeName: 'TListaProdutos')
+  );
+
+  TSMProduto_GetProdutosDelphi_Cache: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: ''; Direction: 4; DBXType: 26; TypeName: 'String')
+  );
+
+  TSMProduto_GetProdutos: array [0..0] of TDSRestParameterMetaData =
+  (
+    (Name: ''; Direction: 4; DBXType: 4; TypeName: 'Boolean')
+  );
+
 implementation
+
+procedure TSMGeralClient.DSServerModuleCreate(Sender: TObject);
+begin
+  if FDSServerModuleCreateCommand = nil then
+  begin
+    FDSServerModuleCreateCommand := FConnection.CreateCommand;
+    FDSServerModuleCreateCommand.RequestType := 'POST';
+    FDSServerModuleCreateCommand.Text := 'TSMGeral."DSServerModuleCreate"';
+    FDSServerModuleCreateCommand.Prepare(TSMGeral_DSServerModuleCreate);
+  end;
+  if not Assigned(Sender) then
+    FDSServerModuleCreateCommand.Parameters[0].Value.SetNull
+  else
+  begin
+    FMarshal := TDSRestCommand(FDSServerModuleCreateCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    try
+      FDSServerModuleCreateCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(Sender), True);
+      if FInstanceOwner then
+        Sender.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+    end;
+  FDSServerModuleCreateCommand.Execute;
+end;
 
 function TSMGeralClient.EchoString(Value: string; const ARequestFilter: string): string;
 begin
@@ -160,6 +240,45 @@ begin
   Result := FReverseStringCommand.Parameters[1].Value.GetWideString;
 end;
 
+function TSMGeralClient.GetDataAtual(const ARequestFilter: string): TDateTime;
+begin
+  if FGetDataAtualCommand = nil then
+  begin
+    FGetDataAtualCommand := FConnection.CreateCommand;
+    FGetDataAtualCommand.RequestType := 'GET';
+    FGetDataAtualCommand.Text := 'TSMGeral.GetDataAtual';
+    FGetDataAtualCommand.Prepare(TSMGeral_GetDataAtual);
+  end;
+  FGetDataAtualCommand.Execute(ARequestFilter);
+  Result := FGetDataAtualCommand.Parameters[0].Value.AsDateTime;
+end;
+
+function TSMGeralClient.GetVersaoServer(const ARequestFilter: string): UInt64;
+begin
+  if FGetVersaoServerCommand = nil then
+  begin
+    FGetVersaoServerCommand := FConnection.CreateCommand;
+    FGetVersaoServerCommand.RequestType := 'GET';
+    FGetVersaoServerCommand.Text := 'TSMGeral.GetVersaoServer';
+    FGetVersaoServerCommand.Prepare(TSMGeral_GetVersaoServer);
+  end;
+  FGetVersaoServerCommand.Execute(ARequestFilter);
+  Result := FGetVersaoServerCommand.Parameters[0].Value.GetInt64;
+end;
+
+function TSMGeralClient.GetTickAtual(const ARequestFilter: string): UInt64;
+begin
+  if FGetTickAtualCommand = nil then
+  begin
+    FGetTickAtualCommand := FConnection.CreateCommand;
+    FGetTickAtualCommand.RequestType := 'GET';
+    FGetTickAtualCommand.Text := 'TSMGeral.GetTickAtual';
+    FGetTickAtualCommand.Prepare(TSMGeral_GetTickAtual);
+  end;
+  FGetTickAtualCommand.Execute(ARequestFilter);
+  Result := FGetTickAtualCommand.Parameters[0].Value.GetInt64;
+end;
+
 constructor TSMGeralClient.Create(ARestConnection: TDSRestConnection);
 begin
   inherited Create(ARestConnection);
@@ -172,8 +291,12 @@ end;
 
 destructor TSMGeralClient.Destroy;
 begin
+  FDSServerModuleCreateCommand.DisposeOf;
   FEchoStringCommand.DisposeOf;
   FReverseStringCommand.DisposeOf;
+  FGetDataAtualCommand.DisposeOf;
+  FGetVersaoServerCommand.DisposeOf;
+  FGetTickAtualCommand.DisposeOf;
   inherited;
 end;
 
@@ -363,6 +486,62 @@ begin
   FDSServerModuleCreateCommand.DisposeOf;
   FGetBlockChainInfoCommand.DisposeOf;
   FGetBlockChainInfoDSCommand.DisposeOf;
+  inherited;
+end;
+
+function TSMProdutoClient.GetProdutosDelphi(const ARequestFilter: string): TListaProdutos;
+begin
+  if FGetProdutosDelphiCommand = nil then
+  begin
+    FGetProdutosDelphiCommand := FConnection.CreateCommand;
+    FGetProdutosDelphiCommand.RequestType := 'GET';
+    FGetProdutosDelphiCommand.Text := 'TSMProduto.GetProdutosDelphi';
+    FGetProdutosDelphiCommand.Prepare(TSMProduto_GetProdutosDelphi);
+  end;
+  FGetProdutosDelphiCommand.Execute(ARequestFilter);
+  if not FGetProdutosDelphiCommand.Parameters[0].Value.IsNull then
+  begin
+    FUnMarshal := TDSRestCommand(FGetProdutosDelphiCommand.Parameters[0].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TListaProdutos(FUnMarshal.UnMarshal(FGetProdutosDelphiCommand.Parameters[0].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FGetProdutosDelphiCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
+end;
+
+function TSMProdutoClient.GetProdutos(const ARequestFilter: string): Boolean;
+begin
+  if FGetProdutosCommand = nil then
+  begin
+    FGetProdutosCommand := FConnection.CreateCommand;
+    FGetProdutosCommand.RequestType := 'GET';
+    FGetProdutosCommand.Text := 'TSMProduto.GetProdutos';
+    FGetProdutosCommand.Prepare(TSMProduto_GetProdutos);
+  end;
+  FGetProdutosCommand.Execute(ARequestFilter);
+  Result := FGetProdutosCommand.Parameters[0].Value.GetBoolean;
+end;
+
+constructor TSMProdutoClient.Create(ARestConnection: TDSRestConnection);
+begin
+  inherited Create(ARestConnection);
+end;
+
+constructor TSMProdutoClient.Create(ARestConnection: TDSRestConnection; AInstanceOwner: Boolean);
+begin
+  inherited Create(ARestConnection, AInstanceOwner);
+end;
+
+destructor TSMProdutoClient.Destroy;
+begin
+  FGetProdutosDelphiCommand.DisposeOf;
+  FGetProdutosDelphiCommand_Cache.DisposeOf;
+  FGetProdutosCommand.DisposeOf;
   inherited;
 end;
 
