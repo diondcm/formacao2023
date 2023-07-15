@@ -20,9 +20,7 @@ object Form1: TForm1
     Height = 436
     Align = alLeft
     TabOrder = 0
-    ExplicitLeft = 232
-    ExplicitTop = 104
-    ExplicitHeight = 41
+    ExplicitHeight = 427
     object LabelTotal: TLabel
       AlignWithMargins = True
       Left = 4
@@ -111,9 +109,7 @@ object Form1: TForm1
     Height = 436
     Align = alLeft
     TabOrder = 1
-    ExplicitLeft = 272
-    ExplicitTop = 128
-    ExplicitHeight = 41
+    ExplicitHeight = 427
     object Label1: TLabel
       AlignWithMargins = True
       Left = 4
@@ -167,9 +163,7 @@ object Form1: TForm1
     Align = alClient
     Color = clInactiveCaption
     TabOrder = 2
-    ExplicitLeft = 232
-    ExplicitTop = 200
-    ExplicitWidth = 185
-    ExplicitHeight = 89
+    ExplicitWidth = 234
+    ExplicitHeight = 427
   end
 end

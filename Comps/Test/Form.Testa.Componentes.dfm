@@ -46,11 +46,9 @@ object frmTestaComps: TfrmTestaComps
     AlignWithMargins = True
     Left = 3
     Top = 57
-    Width = 840
+    Width = 518
     Height = 341
-    Align = alClient
-    DataSource = dtsPessoa
-    ExplicitWidth = 834
+    Align = alLeft
     ExplicitHeight = 332
     object Label1: TLabel
       Left = 32
@@ -112,7 +110,7 @@ object frmTestaComps: TfrmTestaComps
     object DBEdit2: TDBEdit
       Left = 32
       Top = 88
-      Width = 754
+      Width = 300
       Height = 23
       DataField = 'Nome'
       DataSource = dtsPessoa
@@ -155,8 +153,66 @@ object frmTestaComps: TfrmTestaComps
       TabOrder = 5
     end
   end
+  object DBGrid1: TDBGrid
+    AlignWithMargins = True
+    Left = 527
+    Top = 57
+    Width = 316
+    Height = 341
+    Align = alClient
+    DataSource = dtsPessoa
+    TabOrder = 3
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = 'Segoe UI'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'DataCadastro'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Nome'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Saldo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'CPF'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'RG'
+        Visible = True
+      end>
+  end
+  object CalendarPickerDB1: TCalendarPickerDB
+    Left = 360
+    Top = 224
+    Width = 140
+    Height = 32
+    DataField = 'DataCadastro'
+    DataSource = dtsPessoa
+    OnChageDate = CalendarPickerDB1ChageDate
+    Date = 44783.000000000000000000
+    DataPassado = True
+  end
   object memPessoa: TFDMemTable
     BeforePost = memPessoaBeforePost
+    OnNewRecord = memPessoaNewRecord
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -194,5 +250,17 @@ object frmTestaComps: TfrmTestaComps
     DataSet = memPessoa
     Left = 664
     Top = 168
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = memPessoa
+    ScopeMappings = <>
+    Left = 344
+    Top = 80
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 236
+    Top = 77
   end
 end

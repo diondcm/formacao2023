@@ -39,7 +39,7 @@ type
   end;
 
 
-//  procedure RetornaDobro(const valor: Integer; var dobro: Integer);
+  procedure RetornaDobro(const valor: Integer; var dobro: Integer);
 
 var
   Form1: TForm1;
@@ -48,7 +48,7 @@ implementation
 
 {$R *.dfm}
 
-//procedure RetornaDobro; external 'GeraToken.dll';
+   procedure RetornaDobro; external 'GeraToken.dll' delayed; // Só funciona pra 32 bits
 
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -58,6 +58,9 @@ type
   TRetornaDobro = procedure (const valor: Integer; var dobro: Integer);
   TSetValor = procedure (val: Integer);
   TGetValor = function: Integer;
+  TGeraToken = function(p1: Integer): Boolean;
+  TGeraTokenStr = function(p1: PChar): Boolean;
+  TExibeValor = function (valInt: Integer; ValVar: Variant; ValStr: string): Boolean;
 
 begin
   /// Como fazer aqui o loading dinâmico:
@@ -98,11 +101,37 @@ begin
       raise Exception.Create('Método: "GetValor" não carregado');
     end;
 
-    MemoLog.Lines.Insert(0, IntToStr(getToken(47398324)));
-    MemoLog.Lines.Insert(0, IntToStr(maxVal(Random(100), Random(10000))));
+    var geraToken: TGeraToken := GetProcAddress(handleDLL, 'GeraToken');
+    if not Assigned(@@geraToken) then
+    begin
+      raise Exception.Create('Método: "GeraToken" não carregado');
+    end;
 
-    setVal(StrToIntDef(EditValor.Text, -1));
-    MemoLog.Lines.Insert(0, 'Val: ' + IntToStr(getVal()));
+    var geraTokenStr: TGeraTokenStr := GetProcAddress(handleDLL, 'GeraNovoTokenString');
+    if not Assigned(@geraTokenStr) then
+    begin
+      raise Exception.Create('Método: "GeraNovoTokenString" não carregado');
+    end;
+
+    var exibeValor: TExibeValor := GetProcAddress(handleDLL, 'ExibeValor');
+    if not Assigned(@@geraToken) then
+    begin
+      raise Exception.Create('Método: "ExibeValor" não carregado');
+    end;
+
+//    ExibeValor(123, '456', '789');
+//    geraToken(Random(1000));
+    var str: string := 'Teste: ' + TimeToStr(Now);
+    geraTokenStr(PChar(str));
+
+    // D7 - Ansi -> 1 byte por char
+    // 2010 - Unicode -> 2 bytes por char
+
+//    MemoLog.Lines.Insert(0, IntToStr(getToken(47398324)));
+//    MemoLog.Lines.Insert(0, IntToStr(maxVal(Random(100), Random(10000))));
+
+//    setVal(StrToIntDef(EditValor.Text, -1));
+//    MemoLog.Lines.Insert(0, 'Val: ' + IntToStr(getVal()));
 
   finally
     FreeLibrary(handleDLL);
@@ -112,7 +141,7 @@ end;
 procedure TForm1.ButtonDobroClick(Sender: TObject);
 begin
   var valRetrno: Integer := 0;
-//  RetornaDobro(StrToIntDef(EditValor.Text, 1), valRetrno);
+  RetornaDobro(StrToIntDef(EditValor.Text, 1), valRetrno);
   MemoLog.Lines.Insert(0, IntToStr(valRetrno));
 end;
 
@@ -161,7 +190,11 @@ end;
 procedure TForm1.ButtonGetValorClick(Sender: TObject);
 type
   TGetValor = function: Integer;
+//var
+//  valorC: @PDouble;
 begin
+//  valorC^ := 10.6;
+
   var getVal: TGetValor := GetProcAddress(FHandleDLL, 'GetValor');
   if not Assigned(@@getVal) then
   begin

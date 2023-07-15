@@ -12,6 +12,18 @@
         <Projects Include="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="DataLink\DateDB.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Mensagens\TesteMensagens.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="RTTITest\TestRTTI.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="OTA\TesteOTA.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -47,14 +59,50 @@
     <Target Name="pkgPanelObrigatorio:Make">
         <MSBuild Projects="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj" Targets="Make"/>
     </Target>
+    <Target Name="DateDB">
+        <MSBuild Projects="DataLink\DateDB.dproj"/>
+    </Target>
+    <Target Name="DateDB:Clean">
+        <MSBuild Projects="DataLink\DateDB.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DateDB:Make">
+        <MSBuild Projects="DataLink\DateDB.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TesteMensagens">
+        <MSBuild Projects="Mensagens\TesteMensagens.dproj"/>
+    </Target>
+    <Target Name="TesteMensagens:Clean">
+        <MSBuild Projects="Mensagens\TesteMensagens.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TesteMensagens:Make">
+        <MSBuild Projects="Mensagens\TesteMensagens.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TestRTTI">
+        <MSBuild Projects="RTTITest\TestRTTI.dproj"/>
+    </Target>
+    <Target Name="TestRTTI:Clean">
+        <MSBuild Projects="RTTITest\TestRTTI.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestRTTI:Make">
+        <MSBuild Projects="RTTITest\TestRTTI.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="TesteOTA">
+        <MSBuild Projects="OTA\TesteOTA.dproj"/>
+    </Target>
+    <Target Name="TesteOTA:Clean">
+        <MSBuild Projects="OTA\TesteOTA.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TesteOTA:Make">
+        <MSBuild Projects="OTA\TesteOTA.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="ClienteTeste;TestaComps;pkgPanelObrigatorio"/>
+        <CallTarget Targets="ClienteTeste;TestaComps;pkgPanelObrigatorio;DateDB;TesteMensagens;TestRTTI;TesteOTA"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ClienteTeste:Clean;TestaComps:Clean;pkgPanelObrigatorio:Clean"/>
+        <CallTarget Targets="ClienteTeste:Clean;TestaComps:Clean;pkgPanelObrigatorio:Clean;DateDB:Clean;TesteMensagens:Clean;TestRTTI:Clean;TesteOTA:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ClienteTeste:Make;TestaComps:Make;pkgPanelObrigatorio:Make"/>
+        <CallTarget Targets="ClienteTeste:Make;TestaComps:Make;pkgPanelObrigatorio:Make;DateDB:Make;TesteMensagens:Make;TestRTTI:Make;TesteOTA:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

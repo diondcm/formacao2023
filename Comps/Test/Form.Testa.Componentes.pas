@@ -8,7 +8,9 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, Vcl.StdCtrls, Vcl.Mask, Vcl.DBCtrls,
   Componente.Panel.Obrigatorio, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client;
+  FireDAC.Comp.Client, Vcl.WinXCalendars, Data.Bind.EngExt, Vcl.Bind.DBEngExt,
+  Data.Bind.Components, Data.Bind.DBScope, Classe.CalendarPickerDB, Vcl.Grids,
+  Vcl.DBGrids;
 
 type
   TfrmTestaComps = class(TForm)
@@ -36,9 +38,15 @@ type
     DBEdit5: TDBEdit;
     Label6: TLabel;
     DBEdit6: TDBEdit;
+    BindSourceDB1: TBindSourceDB;
+    BindingsList1: TBindingsList;
+    DBGrid1: TDBGrid;
+    CalendarPickerDB1: TCalendarPickerDB;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure memPessoaBeforePost(DataSet: TDataSet);
+    procedure memPessoaNewRecord(DataSet: TDataSet);
+    procedure CalendarPickerDB1ChageDate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,6 +65,11 @@ begin
   PanelObrigatorio1.ValidaObrigatorios;
 end;
 
+procedure TfrmTestaComps.CalendarPickerDB1ChageDate(Sender: TObject);
+begin
+//  ShowMessage('Data alterada');
+end;
+
 procedure TfrmTestaComps.FormCreate(Sender: TObject);
 begin
   memPessoa.Open;
@@ -65,6 +78,12 @@ end;
 procedure TfrmTestaComps.memPessoaBeforePost(DataSet: TDataSet);
 begin
   Caption := TimeToStr(Now);
+end;
+
+procedure TfrmTestaComps.memPessoaNewRecord(DataSet: TDataSet);
+begin
+  memPessoaID.AsInteger := GetTickCount;
+  memPessoaDataCadastro.AsDateTime := Now;
 end;
 
 end.

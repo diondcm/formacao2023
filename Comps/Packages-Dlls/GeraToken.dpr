@@ -18,7 +18,8 @@ library GeraToken;
 uses
   System.SysUtils,
   System.Classes,
-  Classe.Gera.Token in 'Classe.Gera.Token.pas';
+  Classe.Gera.Token in 'Classe.Gera.Token.pas',
+  Form.Gera.Token in 'Form.Gera.Token.pas' {frmGeraToken};
 
 {$R *.res}
 

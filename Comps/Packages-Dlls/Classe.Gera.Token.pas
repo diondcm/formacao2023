@@ -2,6 +2,9 @@ unit Classe.Gera.Token;
 
 interface
 
+uses
+  Form.Gera.Token;
+
 
 type
   TOperacoesMath = class
@@ -23,18 +26,41 @@ type
 
   function GetValor: Integer;
 
+  function GeraToken(base: Integer): Boolean;
+  function GeraTokenStr(base: PChar): Boolean;
+
+  function ExibeValor(valInt: Integer; ValVar: Variant; ValStr: string): Boolean;
 
 exports
   GeraTokenNumerico,
   GetMaiorValor,
   RetornaDobro,
   SetValor,
-  GetValor;
+  GetValor,
+  GeraToken,
+  GeraTokenStr name 'GeraNovoTokenString',
+  ExibeValor;
 
 implementation
 
 uses
-  Winapi.Windows, System.SysUtils, System.Math;
+  Winapi.Windows, System.SysUtils, System.Math, Vcl.Dialogs;
+
+function ExibeValor(valInt: Integer; ValVar: Variant; ValStr: string): Boolean;
+begin
+  Result := True;
+  ShowMessage('Valores: ' + IntToStr(valInt) + ' - ' + ValStr + ' - ' + ValVar);
+end;
+
+function GeraToken(base: Integer): Boolean;
+begin
+  Result := TfrmGeraToken.GeraToken(base);
+end;
+
+function GeraTokenStr(base: PChar): Boolean;
+begin
+  Result := TfrmGeraToken.GeraToken(base);
+end;
 
 procedure SetValor(val: Integer);
 begin

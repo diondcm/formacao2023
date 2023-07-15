@@ -1,4 +1,4 @@
-package pkgGeraToken;
+package TesteOTA;
 
 {$R *.res}
 {$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
@@ -25,17 +25,12 @@ package pkgGeraToken;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
-{$DESCRIPTION 'Pacote gerado por erro, somente usado em runtime'}
-{$LIBPREFIX 'pkg'}
-{$LIBSUFFIX 'del'}
-{$LIBVERSION '3.0'}
-{$RUNONLY}
 {$IMPLICITBUILD ON}
 
 requires
-  rtl;
+  rtl, designide;
 
 contains
-  Classe.Calcula in 'Classe.Calcula.pas';
+  MyWizard in 'MyWizard.pas';
 
 end.
