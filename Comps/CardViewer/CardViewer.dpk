@@ -1,0 +1,50 @@
+package CardViewer;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS ON}
+{$RANGECHECKS ON}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'Visualizador de Cards'}
+{$LIBPREFIX 'pkg'}
+{$LIBVERSION '1.0'}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  vcl,
+  designide,
+  RESTComponents,
+  vclie,
+  vcledge,
+  VCLRESTComponents;
+
+contains
+  Classe.Card.Viewer in 'Classe.Card.Viewer.pas',
+  Classe.Registro.Card.Viewer in 'Classe.Registro.Card.Viewer.pas',
+  Classe.Editor.Propriedade in 'Classe.Editor.Propriedade.pas',
+  Classe.OpenAI.Image in 'Classe.OpenAI.Image.pas',
+  Form.Visualiza.Card in 'Form.Visualiza.Card.pas' {frmVisualizaCard};
+
+end.
+

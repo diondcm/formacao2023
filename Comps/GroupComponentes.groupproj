@@ -3,16 +3,10 @@
         <ProjectGuid>{AC62508F-36B5-44D9-B18A-7FA0AE669189}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="Client\ClienteTeste.dproj">
-            <Dependencies/>
-        </Projects>
         <Projects Include="Test\TestaComps.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj">
-            <Dependencies/>
-        </Projects>
-        <Projects Include="DataLink\DateDB.dproj">
+        <Projects Include="Client\ClienteTeste.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="Mensagens\TesteMensagens.dproj">
@@ -21,7 +15,16 @@
         <Projects Include="RTTITest\TestRTTI.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="DataLink\DateDB.dproj">
+            <Dependencies/>
+        </Projects>
         <Projects Include="OTA\TesteOTA.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="CardViewer\CardViewer.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -32,15 +35,6 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="ClienteTeste">
-        <MSBuild Projects="Client\ClienteTeste.dproj"/>
-    </Target>
-    <Target Name="ClienteTeste:Clean">
-        <MSBuild Projects="Client\ClienteTeste.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="ClienteTeste:Make">
-        <MSBuild Projects="Client\ClienteTeste.dproj" Targets="Make"/>
-    </Target>
     <Target Name="TestaComps">
         <MSBuild Projects="Test\TestaComps.dproj"/>
     </Target>
@@ -50,23 +44,14 @@
     <Target Name="TestaComps:Make">
         <MSBuild Projects="Test\TestaComps.dproj" Targets="Make"/>
     </Target>
-    <Target Name="pkgPanelObrigatorio">
-        <MSBuild Projects="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj"/>
+    <Target Name="ClienteTeste">
+        <MSBuild Projects="Client\ClienteTeste.dproj"/>
     </Target>
-    <Target Name="pkgPanelObrigatorio:Clean">
-        <MSBuild Projects="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj" Targets="Clean"/>
+    <Target Name="ClienteTeste:Clean">
+        <MSBuild Projects="Client\ClienteTeste.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="pkgPanelObrigatorio:Make">
-        <MSBuild Projects="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj" Targets="Make"/>
-    </Target>
-    <Target Name="DateDB">
-        <MSBuild Projects="DataLink\DateDB.dproj"/>
-    </Target>
-    <Target Name="DateDB:Clean">
-        <MSBuild Projects="DataLink\DateDB.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="DateDB:Make">
-        <MSBuild Projects="DataLink\DateDB.dproj" Targets="Make"/>
+    <Target Name="ClienteTeste:Make">
+        <MSBuild Projects="Client\ClienteTeste.dproj" Targets="Make"/>
     </Target>
     <Target Name="TesteMensagens">
         <MSBuild Projects="Mensagens\TesteMensagens.dproj"/>
@@ -86,6 +71,24 @@
     <Target Name="TestRTTI:Make">
         <MSBuild Projects="RTTITest\TestRTTI.dproj" Targets="Make"/>
     </Target>
+    <Target Name="pkgPanelObrigatorio">
+        <MSBuild Projects="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj"/>
+    </Target>
+    <Target Name="pkgPanelObrigatorio:Clean">
+        <MSBuild Projects="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="pkgPanelObrigatorio:Make">
+        <MSBuild Projects="..\..\Embarcadero\Studio\Projects\pkgPanelObrigatorio.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DateDB">
+        <MSBuild Projects="DataLink\DateDB.dproj"/>
+    </Target>
+    <Target Name="DateDB:Clean">
+        <MSBuild Projects="DataLink\DateDB.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DateDB:Make">
+        <MSBuild Projects="DataLink\DateDB.dproj" Targets="Make"/>
+    </Target>
     <Target Name="TesteOTA">
         <MSBuild Projects="OTA\TesteOTA.dproj"/>
     </Target>
@@ -95,14 +98,23 @@
     <Target Name="TesteOTA:Make">
         <MSBuild Projects="OTA\TesteOTA.dproj" Targets="Make"/>
     </Target>
+    <Target Name="CardViewer">
+        <MSBuild Projects="CardViewer\CardViewer.dproj"/>
+    </Target>
+    <Target Name="CardViewer:Clean">
+        <MSBuild Projects="CardViewer\CardViewer.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CardViewer:Make">
+        <MSBuild Projects="CardViewer\CardViewer.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="ClienteTeste;TestaComps;pkgPanelObrigatorio;DateDB;TesteMensagens;TestRTTI;TesteOTA"/>
+        <CallTarget Targets="TestaComps;ClienteTeste;TesteMensagens;TestRTTI;pkgPanelObrigatorio;DateDB;TesteOTA;CardViewer"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ClienteTeste:Clean;TestaComps:Clean;pkgPanelObrigatorio:Clean;DateDB:Clean;TesteMensagens:Clean;TestRTTI:Clean;TesteOTA:Clean"/>
+        <CallTarget Targets="TestaComps:Clean;ClienteTeste:Clean;TesteMensagens:Clean;TestRTTI:Clean;pkgPanelObrigatorio:Clean;DateDB:Clean;TesteOTA:Clean;CardViewer:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ClienteTeste:Make;TestaComps:Make;pkgPanelObrigatorio:Make;DateDB:Make;TesteMensagens:Make;TestRTTI:Make;TesteOTA:Make"/>
+        <CallTarget Targets="TestaComps:Make;ClienteTeste:Make;TesteMensagens:Make;TestRTTI:Make;pkgPanelObrigatorio:Make;DateDB:Make;TesteOTA:Make;CardViewer:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

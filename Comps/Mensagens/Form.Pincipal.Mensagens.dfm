@@ -10,9 +10,11 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  KeyPreview = True
   Position = poScreenCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
   TextHeight = 15
   object Splitter1: TSplitter
     Left = 185
@@ -32,9 +34,7 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
     Color = clSkyBlue
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 312
-    ExplicitTop = 176
-    ExplicitWidth = 185
+    ExplicitWidth = 733
     object ButtonProcessamento: TButton
       AlignWithMargins = True
       Left = 4
@@ -71,13 +71,22 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
       Text = 'Texto alterado'
     end
     object ButtonFormWin: TButton
-      Left = 544
+      Left = 536
       Top = 8
       Width = 75
       Height = 25
       Caption = 'Form Win'
       TabOrder = 4
       OnClick = ButtonFormWinClick
+    end
+    object ButtonFreeze: TButton
+      Left = 648
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'Freeze'
+      TabOrder = 5
+      OnClick = ButtonFreezeClick
     end
   end
   object PanelMessage: TPanel
@@ -90,8 +99,7 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
     Color = clActiveCaption
     ParentBackground = False
     TabOrder = 1
-    ExplicitLeft = -29
-    ExplicitWidth = 622
+    ExplicitWidth = 733
     object Label1: TLabel
       Left = 403
       Top = 14
@@ -113,17 +121,16 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
       Height = 15
       Caption = 'Msg'
     end
-    object Button1: TButton
+    object ButtonSend: TButton
       AlignWithMargins = True
-      Left = 131
+      Left = 191
       Top = 4
-      Width = 117
+      Width = 54
       Height = 33
       Align = alLeft
-      Caption = 'Envia msg'
+      Caption = 'Send'
       TabOrder = 0
-      OnClick = Button1Click
-      ExplicitLeft = 4
+      OnClick = ButtonSendClick
     end
     object EditW: TEdit
       Left = 424
@@ -156,8 +163,7 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
       Align = alLeft
       Color = clMoneyGreen
       TabOrder = 3
-      ExplicitLeft = -65
-      ExplicitTop = 4
+      ExplicitHeight = 23
     end
     object EditMsg: TEdit
       Left = 296
@@ -169,6 +175,26 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
       ParentBiDiMode = False
       TabOrder = 4
     end
+    object Button3: TButton
+      Left = 648
+      Top = 9
+      Width = 75
+      Height = 25
+      Caption = 'Show Form'
+      TabOrder = 5
+      OnClick = Button3Click
+    end
+    object ButtonPost: TButton
+      AlignWithMargins = True
+      Left = 131
+      Top = 4
+      Width = 54
+      Height = 33
+      Align = alLeft
+      Caption = 'Post'
+      TabOrder = 6
+      OnClick = ButtonPostClick
+    end
   end
   object MemoLog: TMemo
     AlignWithMargins = True
@@ -179,10 +205,8 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
     Align = alClient
     Color = clInfoBk
     TabOrder = 2
-    ExplicitLeft = 3
-    ExplicitTop = 296
-    ExplicitWidth = 143
-    ExplicitHeight = 622
+    ExplicitWidth = 545
+    ExplicitHeight = 292
   end
   object Panel1: TPanel
     Left = 0
@@ -191,9 +215,7 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
     Height = 307
     Align = alLeft
     TabOrder = 3
-    ExplicitLeft = 232
-    ExplicitTop = 224
-    ExplicitHeight = 41
+    ExplicitHeight = 298
     object ListBoxHandles: TListBox
       AlignWithMargins = True
       Left = 4
@@ -204,10 +226,7 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
       ItemHeight = 15
       TabOrder = 0
       OnClick = ListBoxHandlesClick
-      ExplicitLeft = 64
-      ExplicitTop = 192
-      ExplicitWidth = 121
-      ExplicitHeight = 97
+      ExplicitHeight = 243
     end
     object Panel2: TPanel
       AlignWithMargins = True
@@ -217,9 +236,6 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
       Height = 41
       Align = alTop
       TabOrder = 1
-      ExplicitLeft = 104
-      ExplicitTop = 72
-      ExplicitWidth = 185
       object CheckBoxAtivar: TCheckBox
         Left = 16
         Top = 11
@@ -238,9 +254,7 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
     Height = 41
     Align = alTop
     TabOrder = 4
-    ExplicitLeft = 232
-    ExplicitTop = 224
-    ExplicitWidth = 185
+    ExplicitWidth = 739
     object ButtonClick: TButton
       AlignWithMargins = True
       Left = 4
@@ -262,8 +276,6 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
       Caption = 'SetText'
       TabOrder = 1
       OnClick = ButtonSetTextClick
-      ExplicitLeft = 236
-      ExplicitTop = 5
     end
     object ButtonClose: TButton
       AlignWithMargins = True
@@ -275,8 +287,6 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
       Caption = 'Close'
       TabOrder = 2
       OnClick = ButtonCloseClick
-      ExplicitLeft = 324
-      ExplicitTop = 3
     end
     object ButtonShake: TButton
       AlignWithMargins = True
@@ -288,8 +298,6 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
       Caption = 'Shake'
       TabOrder = 3
       OnClick = ButtonShakeClick
-      ExplicitLeft = 475
-      ExplicitTop = -6
     end
     object ButtonSetParent: TButton
       AlignWithMargins = True
@@ -301,8 +309,6 @@ object frmPrincipalMensagens: TfrmPrincipalMensagens
       Caption = 'SetParent'
       TabOrder = 4
       OnClick = ButtonSetParentClick
-      ExplicitLeft = 582
-      ExplicitTop = 5
     end
     object Button2: TButton
       Left = 634

@@ -12,4 +12,24 @@ object frmDestino: TfrmDestino
   Font.Style = []
   Position = poScreenCenter
   TextHeight = 15
+  object PanelMov: TPanel
+    Left = 8
+    Top = 8
+    Width = 233
+    Height = 161
+    Color = clSkyBlue
+    ParentBackground = False
+    TabOrder = 0
+    OnMouseDown = PanelMovMouseDown
+  end
+  object PanelSize: TPanel
+    Left = 387
+    Top = 273
+    Width = 233
+    Height = 161
+    Color = clMoneyGreen
+    ParentBackground = False
+    TabOrder = 1
+    OnMouseDown = PanelSizeMouseDown
+  end
 end

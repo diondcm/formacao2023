@@ -16,7 +16,7 @@ type
     ButtonProcessamento: TButton;
     EditAviso: TEdit;
     PanelMessage: TPanel;
-    Button1: TButton;
+    ButtonSend: TButton;
     Label1: TLabel;
     EditW: TEdit;
     Label2: TLabel;
@@ -41,9 +41,12 @@ type
     ButtonSetParent: TButton;
     ButtonFormWin: TButton;
     Button2: TButton;
+    Button3: TButton;
+    ButtonPost: TButton;
+    ButtonFreeze: TButton;
     procedure ButtonProcessamentoClick(Sender: TObject);
     procedure EditAvisoChange(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure ButtonSendClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure TimerBuscaTimer(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -56,6 +59,10 @@ type
     procedure ButtonSetParentClick(Sender: TObject);
     procedure ButtonFormWinClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure ButtonPostClick(Sender: TObject);
+    procedure ButtonFreezeClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     FListaWnds: TDictionary<string, THandle>;
     procedure WmMyMessage(var Msg: TMessage); message WM_MYMESSAGE;
@@ -143,9 +150,9 @@ begin
     nil);
 end;
 
-procedure TfrmPrincipalMensagens.Button1Click(Sender: TObject);
+procedure TfrmPrincipalMensagens.ButtonSendClick(Sender: TObject);
 begin
-  PostMessage(StrToIntDef(EditHandleDestino.Text, Handle), StrToIntDef(EditMsg.Text, WM_MYMESSAGE), StrToIntDef(EditW.Text, 0), StrToIntDef(EditL.Text, 0));
+  SendMessage(StrToIntDef(EditHandleDestino.Text, Handle), StrToIntDef(EditMsg.Text, WM_MYMESSAGE), StrToIntDef(EditW.Text, 0), StrToIntDef(EditL.Text, 0));
 end;
 
 procedure TfrmPrincipalMensagens.Button2Click(Sender: TObject);
@@ -154,6 +161,11 @@ begin
 //  NewWndProc := MakeObjectInstance(HookWndProc);
   SetWindowLongPtr(StrToInt(EditHandleDestino.Text), GWL_WNDPROC, LongInt(@HookWndProc));
   Caption := 'Ok - ' + TimeToStr(Now);
+end;
+
+procedure TfrmPrincipalMensagens.Button3Click(Sender: TObject);
+begin
+  TfrmDestino.Create(Self).Show;
 end;
 
 procedure TfrmPrincipalMensagens.ButtonClickClick(Sender: TObject);
@@ -197,6 +209,16 @@ begin
   CriaControlesWin;
 
   ShowWindow(lFormWin, SW_SHOWNORMAL);
+end;
+
+procedure TfrmPrincipalMensagens.ButtonFreezeClick(Sender: TObject);
+begin
+  Sleep(7000);
+end;
+
+procedure TfrmPrincipalMensagens.ButtonPostClick(Sender: TObject);
+begin
+  PostMessage(StrToIntDef(EditHandleDestino.Text, Handle), StrToIntDef(EditMsg.Text, WM_MYMESSAGE), StrToIntDef(EditW.Text, 0), StrToIntDef(EditL.Text, 0));
 end;
 
 procedure TfrmPrincipalMensagens.ButtonProcessamentoClick(Sender: TObject);
@@ -288,6 +310,17 @@ end;
 procedure TfrmPrincipalMensagens.FormDestroy(Sender: TObject);
 begin
   FListaWnds.Free;
+end;
+
+procedure TfrmPrincipalMensagens.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  // Key preview := True
+  if Key = VK_RETURN then
+  begin
+    Perform(WM_NEXTDLGCTL, 0, 0);
+//    SendMessage(Handle, WM_NEXTDLGCTL, 0, 0);
+  end;
 end;
 
 procedure TfrmPrincipalMensagens.ListBoxHandlesClick(Sender: TObject);

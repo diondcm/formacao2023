@@ -38,7 +38,7 @@ begin
   if Assigned(ToolsMenuItem) then
   begin
     FMenuItem := TMenuItem.Create(nil);
-    FMenuItem.Caption := 'My OTA Wizard';
+    FMenuItem.Caption := 'Aqua OTA Wizard';
     FMenuItem.OnClick := MenuItemClick;
     ToolsMenuItem.Add(FMenuItem);
   end;
@@ -52,17 +52,17 @@ end;
 
 procedure TMyOTAWizard.Execute;
 begin
-  // This method is called when the user selects the Tools | My OTA Wizard menu item.
+  ShowMessage('Wizard da melhor turma de criação de componentes do ano!');
 end;
 
 function TMyOTAWizard.GetIDString: string;
 begin
-  Result := 'MyCompany.MyOTAWizard';
+  Result := 'AquaOTA.MyOTAWizard';
 end;
 
 function TMyOTAWizard.GetName: string;
 begin
-  Result := 'My OTA Wizard';
+  Result := 'Aqua OTA Wizard';
 end;
 
 function TMyOTAWizard.GetState: TWizardState;
@@ -72,7 +72,7 @@ end;
 
 procedure TMyOTAWizard.MenuItemClick(Sender: TObject);
 begin
-  ShowMessage('Hello, world!');
+  ShowMessage('Wizard da melhor turma de criação de componentes do ano!');
 end;
 
 initialization
