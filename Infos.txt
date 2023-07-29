@@ -1,4 +1,7 @@
 -- URLs --
+https://www.goodreads.com/
+https://www.weforum.org/reports/the-future-of-jobs-report-2023/digest/
+
 https://github.com/HashLoad/horse
 
 https://github.com/OpenSourceCommunityBrasil/REST-DataWare
