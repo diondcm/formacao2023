@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.StorageBin, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, frxClass, frxDBSet, Datasnap.DBClient, frCoreClasses;
+  FireDAC.Comp.Client, frxClass, frxDBSet, Datasnap.DBClient, frCoreClasses,
+  frxBarcode;
 
 type
   TdmdRelatoriosSimples = class(TDataModule)

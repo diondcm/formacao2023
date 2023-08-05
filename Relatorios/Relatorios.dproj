@@ -122,6 +122,30 @@
             <Form>frmRelHerdado</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Data.Rel.CodBarra.pas">
+            <Form>dmdRelCodBarra</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Data.Rel.Imagens.pas">
+            <Form>dmdRelImagens</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Form.Rel.Main.Detail.Detail.pas">
+            <Form>frmMainDetailDetail</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Data.Rel.Main.Detail.Detail.pas">
+            <Form>dmdRelMainDetailDetail</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Data.Preview.Relatorios.pas">
+            <Form>dmdRelatorio</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

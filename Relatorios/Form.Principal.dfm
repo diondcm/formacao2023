@@ -24,7 +24,7 @@ object frmPrincipal: TfrmPrincipal
     Color = 12477460
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 665
+    ExplicitWidth = 726
     object imgMenu: TImage
       Left = 10
       Top = 10
@@ -65,12 +65,12 @@ object frmPrincipal: TfrmPrincipal
     OpenedWidth = 200
     Placement = svpLeft
     TabOrder = 1
-    ExplicitHeight = 380
+    ExplicitHeight = 468
     object catMenuItems: TCategoryButtons
       Left = 0
       Top = -20
       Width = 194
-      Height = 221
+      Height = 269
       BorderStyle = bsNone
       ButtonFlow = cbfVertical
       ButtonHeight = 40
@@ -93,6 +93,12 @@ object frmPrincipal: TfrmPrincipal
             item
               Action = ActionConversao
               ImageIndex = 3
+            end
+            item
+              Action = ActionMainDetailDetail
+            end
+            item
+              Action = ActionLoad
             end>
         end>
       Font.Charset = DEFAULT_CHARSET
@@ -113,9 +119,11 @@ object frmPrincipal: TfrmPrincipal
     Top = 50
     Width = 530
     Height = 480
-    ActivePage = TabConversao
+    ActivePage = TabPreview
     Align = alClient
     TabOrder = 2
+    ExplicitWidth = 526
+    ExplicitHeight = 468
     object TabLayout: TTabSheet
       Caption = 'Layout'
       object pnlSettings: TPanel
@@ -127,10 +135,6 @@ object frmPrincipal: TfrmPrincipal
         BevelOuter = bvNone
         ParentBackground = False
         TabOrder = 0
-        ExplicitLeft = 200
-        ExplicitTop = 50
-        ExplicitWidth = 465
-        ExplicitHeight = 380
         object lblLog: TLabel
           Left = 20
           Top = 152
@@ -292,13 +296,29 @@ object frmPrincipal: TfrmPrincipal
         TabOrder = 0
       end
     end
+    object TabPreview: TTabSheet
+      Caption = 'Preview'
+      ImageIndex = 2
+      object ImagePreview: TImage
+        Left = 0
+        Top = 0
+        Width = 522
+        Height = 450
+        Align = alClient
+        Stretch = True
+        ExplicitLeft = 208
+        ExplicitTop = 176
+        ExplicitWidth = 105
+        ExplicitHeight = 105
+      end
+    end
   end
   object imlIcons: TImageList
     ColorDepth = cd32Bit
     Height = 32
     Width = 32
-    Left = 80
-    Top = 284
+    Left = 88
+    Top = 396
     Bitmap = {
       494C010104008000040020002000FFFFFFFF2110FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000800000004000000001002000000000000080
@@ -1365,8 +1385,8 @@ object frmPrincipal: TfrmPrincipal
   end
   object ActionListRel: TActionList
     Images = imlIcons
-    Left = 80
-    Top = 212
+    Left = 184
+    Top = 372
     object ActionSimples: TAction
       Caption = 'Simples'
       ImageIndex = 1
@@ -1386,5 +1406,18 @@ object frmPrincipal: TfrmPrincipal
       Caption = 'Convers'#227'o'
       OnExecute = ActionConversaoExecute
     end
+    object ActionMainDetailDetail: TAction
+      Caption = 'Main/Detail/Detail'
+      ImageIndex = 0
+      OnExecute = ActionMainDetailDetailExecute
+    end
+    object ActionLoad: TAction
+      Caption = 'Load'
+      OnExecute = ActionLoadExecute
+    end
+  end
+  object OpenDialogReport: TOpenDialog
+    Left = 48
+    Top = 312
   end
 end

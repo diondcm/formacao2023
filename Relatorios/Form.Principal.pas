@@ -11,7 +11,8 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, frxADOComponents, frxDBXComponents,
   Vcl.ExtCtrls, Vcl.DBCtrls, frxGradient, Form.Relatorio.Simples,
   System.Actions, Vcl.ActnList, System.ImageList, Vcl.ImgList,
-  Vcl.CategoryButtons, Vcl.WinXCtrls, Vcl.ComCtrls, Vcl.Imaging.pngimage;
+  Vcl.CategoryButtons, Vcl.WinXCtrls, Vcl.ComCtrls, Vcl.Imaging.pngimage,
+  Form.Rel.Main.Detail.Detail, Data.Preview.Relatorios;
 
 type
   TfrmPrincipal = class(TForm)
@@ -45,6 +46,11 @@ type
     TabConversao: TTabSheet;
     Memo1: TMemo;
     ActionConversao: TAction;
+    TabPreview: TTabSheet;
+    ImagePreview: TImage;
+    ActionMainDetailDetail: TAction;
+    ActionLoad: TAction;
+    OpenDialogReport: TOpenDialog;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ActionSimplesExecute(Sender: TObject);
@@ -67,6 +73,8 @@ type
     procedure trkAnimationStepChange(Sender: TObject);
     procedure ActionConversaoExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ActionMainDetailDetailExecute(Sender: TObject);
+    procedure ActionLoadExecute(Sender: TObject);
   public
     { Public declarations }
     procedure ExibeAba(tab: TTabSheet);
@@ -190,6 +198,23 @@ end;
 procedure TfrmPrincipal.ActionConversaoExecute(Sender: TObject);
 begin
   ExibeAba(TabConversao);
+end;
+
+procedure TfrmPrincipal.ActionLoadExecute(Sender: TObject);
+begin
+  if OpenDialogReport.Execute then
+  begin
+//    dmdRelatorio.frxDesigner.opendir := OpenDialogReport.FileName;
+//    dmdRelatorio.frxDesigner.DesignReport;
+
+//    dmdRelatorio.frxReportPreview.LoadFromFile(OpenDialogReport.FileName);
+//    dmdRelatorio.frxReportPreview.ShowReport;
+  end;
+end;
+
+procedure TfrmPrincipal.ActionMainDetailDetailExecute(Sender: TObject);
+begin
+  frmMainDetailDetail.Show;
 end;
 
 procedure TfrmPrincipal.ActionSimplesExecute(Sender: TObject);

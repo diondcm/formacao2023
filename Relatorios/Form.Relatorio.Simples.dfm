@@ -20,7 +20,7 @@ object frmRelatoriosSimples: TfrmRelatoriosSimples
     Height = 41
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 616
+    ExplicitWidth = 768
     object ButtonExemplo: TButton
       Left = 8
       Top = 9
@@ -49,13 +49,31 @@ object frmRelatoriosSimples: TfrmRelatoriosSimples
       OnClick = ButtonMainDetailClick
     end
     object Button1: TButton
-      Left = 520
+      Left = 456
       Top = 9
       Width = 91
       Height = 25
       Caption = 'Vars'
       TabOrder = 3
       OnClick = Button1Click
+    end
+    object ButtonCodBarra: TButton
+      Left = 553
+      Top = 9
+      Width = 75
+      Height = 25
+      Caption = 'C'#243'd. Barra'
+      TabOrder = 4
+      OnClick = ButtonCodBarraClick
+    end
+    object ButtonLoadReport: TButton
+      Left = 634
+      Top = 9
+      Width = 75
+      Height = 25
+      Caption = 'Load Report'
+      TabOrder = 5
+      OnClick = ButtonLoadReportClick
     end
   end
   object Panel1: TPanel
@@ -66,7 +84,7 @@ object frmRelatoriosSimples: TfrmRelatoriosSimples
     Height = 392
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 616
+    ExplicitWidth = 768
     ExplicitHeight = 380
     object Splitter1: TSplitter
       Left = 1
@@ -114,7 +132,7 @@ object frmRelatoriosSimples: TfrmRelatoriosSimples
       Height = 25
       Align = alTop
       TabOrder = 2
-      ExplicitWidth = 614
+      ExplicitWidth = 766
     end
     object DBNavigator2: TDBNavigator
       Left = 1
@@ -124,7 +142,7 @@ object frmRelatoriosSimples: TfrmRelatoriosSimples
       Align = alBottom
       TabOrder = 3
       ExplicitTop = 354
-      ExplicitWidth = 614
+      ExplicitWidth = 766
     end
   end
   object dtsCountry: TDataSource
